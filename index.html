@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>苏州慢游 · 江南双日手册</title>
+<style>
+:root{
+  --paper:#faf7f0; --card:#ffffff; --ink:#2b3a34; --pine:#2f5d4f; --pine-soft:#eef4f1;
+  --cinnabar:#c0453a; --gold:#a97c2f; --line:#e7e0d3; --muted:#7a857f;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  line-height:1.7;font-size:15px;padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+h1,h2,h3{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-weight:700;color:var(--pine)}
+a{color:var(--pine)}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+/* hero */
+header{background:linear-gradient(160deg,#2f5d4f 0%,#3d6e5e 55%,#527f6b 100%);color:#f4efe4;
+  padding:calc(34px + env(safe-area-inset-top)) 16px 26px;text-align:center;position:relative;overflow:hidden}
+header::after{content:"🪷";position:absolute;right:14px;bottom:6px;font-size:54px;opacity:.14}
+header .sub{font-size:13px;letter-spacing:.35em;opacity:.85;margin-bottom:8px}
+header h1{color:#fff;font-size:30px;margin:0 0 6px;letter-spacing:.08em}
+header p{margin:6px 0 0;opacity:.9;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:999px;
+  padding:4px 12px;font-size:12.5px;backdrop-filter:blur(2px)}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:rgba(250,247,240,.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+nav .inner{display:inline-flex;gap:6px;padding:9px 14px}
+nav a{flex:none;font-size:13px;color:var(--pine);text-decoration:none;background:var(--pine-soft);
+  border-radius:999px;padding:5px 13px;border:1px solid #dcebe4}
+nav a:active{background:#dcebe4}
+
+section{padding:26px 0 4px}
+h2{font-size:21px;margin:0 0 4px;padding-left:12px;border-left:4px solid var(--cinnabar)}
+.hint{color:var(--muted);font-size:13px;margin:2px 0 14px 16px}
+
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(285px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px;
+  box-shadow:0 1px 4px rgba(43,58,52,.05)}
+.card h3{margin:0 0 6px;font-size:16.5px}
+.card p{margin:5px 0;font-size:14px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{display:inline-block;background:var(--pine-soft);color:var(--pine);border-radius:999px;
+  padding:2px 10px;font-size:12px;border:1px solid #dcebe4}
+.tag.price{background:#fbeee9;color:var(--cinnabar);border-color:#f3d9d2}
+.tag.gold{background:#f8f1e2;color:var(--gold);border-color:#eddfc2}
+.src{font-size:11.5px;color:var(--muted);margin-top:8px}
+.src a{color:#9aa8a1;text-decoration:none;border-bottom:1px dotted #c9d2cd}
+.star{color:var(--cinnabar)}
+
+/* timeline */
+.day{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 16px 8px;margin-bottom:14px}
+.day h3{margin:0 0 2px;font-size:17px}
+.day .swap{font-size:12px;color:var(--gold);margin-bottom:10px}
+.block{position:relative;padding:0 0 16px 74px;border-left:2px dashed #d8e2dc;margin-left:56px}
+.block:last-child{border-left-color:transparent}
+.block::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;
+  background:var(--pine);border:2px solid var(--paper)}
+.t{position:absolute;left:-56px;top:0;width:44px;text-align:right;font-size:12.5px;color:var(--cinnabar);font-weight:600}
+.block b{display:block;font-size:15px;color:var(--pine)}
+.block span{font-size:13.5px;color:#51605a}
+.opts{font-size:13px;color:var(--gold);margin-top:3px}
+
+.switch{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(255px,1fr))}
+.sw{background:#fdfcf8;border:1.5px dashed #d9c9a8;border-radius:14px;padding:12px 14px;font-size:13.5px}
+.sw b{color:var(--gold);display:block;margin-bottom:4px;font-size:14.5px}
+
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;font-size:13.5px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--pine-soft);color:var(--pine);font-size:12.5px}
+tr:last-child td{border-bottom:none}
+.tblwrap{overflow-x:auto;border-radius:14px}
+
+ul.clean{margin:8px 0;padding-left:0;list-style:none}
+ul.clean li{padding:7px 0 7px 26px;position:relative;font-size:14px;border-bottom:1px dashed #ece5d8}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{content:"✦";position:absolute;left:6px;color:var(--cinnabar);font-size:12px}
+
+.check{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 16px}
+.check li::before{content:"☑";color:var(--pine);font-size:15px}
+.check li{border-bottom:1px dashed #ece5d8}
+
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600;color:var(--pine);font-size:14.5px}
+details li{font-size:12.5px;color:#66716b;word-break:break-all;margin:6px 0}
+.callout{background:#fbeee9;border:1px solid #f0d5cd;border-radius:14px;padding:12px 16px;font-size:13.5px;margin:12px 0}
+.callout b{color:var(--cinnabar)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:26px 16px 10px;line-height:1.9}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="sub">SUZHOU · 慢游双日</div>
+  <h1>江南双日 · 慢游手册</h1>
+  <p>上海出发自驾 1.5h · 园林 / 水巷 / 茶点 / 老字号<br>不赶路、多选择、说走就走</p>
+  <div class="chips">
+    <span class="chip">🚗 浦东出发 100km</span>
+    <span class="chip">🎫 11月淡季票价</span>
+    <span class="chip">✅ 古城外地车不限行</span>
+    <span class="chip">🧋 茶颜悦色已进驻</span>
+  </div>
+</header>
+
+<nav><div class="inner">
+  <a href="#before">行前须知</a><a href="#go">交通停车</a><a href="#spots">景点菜单</a>
+  <a href="#plan">两日行程</a><a href="#tea">茶颜悦色</a><a href="#food">吃什么</a>
+  <a href="#stay">住哪里</a><a href="#budget">预算清单</a><a href="#tips">注意</a><a href="#sources">来源</a>
+</div></nav>
+
+<div class="wrap">
+
+<!-- ============ 行前须知 ============ -->
+<section id="before">
+  <h2>行前须知</h2>
+  <p class="hint">出发前一晚花 10 分钟过一遍</p>
+  <div class="grid">
+    <div class="card"><h3>🎫 淡季票价（1/2/3/6/11/12月）</h3>
+      <p>拙政园 <b class="star">70元</b> · 虎丘 <b class="star">60元</b> · 留园 <b class="star">45元</b>（旺季更贵）；山塘街、平江路、金鸡湖 <b>免费</b>。</p>
+      <div class="src">来源：苏州市园林局官网 <a href="https://ylj.suzhou.gov.cn/szsylj/mpjg/wztt.shtml">票价表</a></div></div>
+    <div class="card"><h3>📝 预约规则</h3>
+      <p>园林<b>实名分时预约</b>，可提前 7 天；<b>拙政园周末常约满 → 至少提前 1 天</b>。每单限 1 张、当天有效、凭身份证核验。</p>
+      <p style="font-size:13px;color:#a0523f">⚠️ 爽约：当日退票记爽约，一周 2 次 → 30 天内禁约；退票赶在游览日前一日 24:00 前。</p>
+      <div class="src">渠道：「君到苏州」小程序 /「苏州园林旅游」公众号</div></div>
+    <div class="card"><h3>🚙 古城限行（已放宽）</h3>
+      <p><b>2026-01-06 起古城四项外地车限行全部取消</b>——外地蓝牌小客车全天可进古城，无尾号限行。</p>
+      <div class="src">来源：<a href="https://www.suzhou.gov.cn/szsrmzf/mszx/202512/317404a496ef4f8d8a98fbf7d17e0ac0.shtml">苏州市政府通告</a></div></div>
+    <div class="card"><h3>🧱 但小巷收紧了</h3>
+      <p><b>潘儒巷全天禁行</b>；白塔西路全天东→西单行；西北街西→东单行；狮林寺巷部分禁行——都在景点周边，<b>务必跟着导航走单行线</b>。</p>
+      <div class="src">来源：同上官方通告</div></div>
+    <div class="card"><h3>🌦 11月天气</h3>
+      <p>典型：13~19°C，湿冷、多阴雨。<b>带伞 + 薄外套/风衣 + 防滑鞋</b>。具体预报出发前 1 天再查（苏州 11 月中旬常有小雨）。</p></div>
+    <div class="card"><h3>🎪 出发前查一眼</h3>
+      <p>周末如有演唱会/展会，晚间场馆周边会堵——<b>出发前看一眼「苏州交警」发布</b>，绕开 18:30-21:30 场馆路段。</p></div>
+  </div>
+</section>
+
+<!-- ============ 交通停车 ============ -->
+<section id="go">
+  <h2>交通与停车</h2>
+  <p class="hint">两条路线二选一，古城内景点间距都在打车起步价级</p>
+  <div class="grid">
+    <div class="card"><h3>🛣 路线 A · G2 京沪（主选）</h3>
+      <p>浦东 → S20 外环 → G2，约 <b>100-110km</b>，顺畅 <b>1.5-2h</b>。</p>
+      <p style="font-size:13px">瓶颈：中环万镇路入口 6 车道并 2 车道 → <b>可走 S6 绕开</b>。</p>
+      <div class="src">来源：<a href="http://sh.people.com.cn/n2/2023/0308/c176737-40329283.html">上海发布/人民网</a>、<a href="https://gaj.sh.gov.cn/shga/wzXxfbGj/detail?pa=110ef360e4374a417b3cc1e225a8ffabe36a90809a385fdef3ab48511424362d">上海公安局出行攻略</a></div></div>
+    <div class="card"><h3>🛤 路线 B · S26 沪常（备选）</h3>
+      <p>更靠南、通常车少，到苏州南部约 <b>50 分钟-1h</b>；适合 G2 拥堵时切换。</p>
+      <div class="src">来源：上海市公安局出行攻略（同上）</div></div>
+    <div class="card"><h3>💰 单程费用</h3>
+      <p>过路费约 40-60 + 油费约 50-60 ≈ <b class="star">100-120 元/单程</b>（按 110km 估算）。</p></div>
+    <div class="card"><h3>⏰ 出发时段建议</h3>
+      <p><b>周六上午是出城高峰 → 尽量 07:00 前出发</b>或走 S26；返程避开 15:00-20:00 高峰（早出或 20:30 后）。</p></div>
+  </div>
+
+  <div class="tblwrap" style="margin-top:14px">
+  <table>
+    <tr><th>片区</th><th>停车场（泊位）</th><th>收费参考</th></tr>
+    <tr><td>拙政园/苏博</td><td>拙政园南（东北街178号·246）；城东（200）；百家巷园林（约100）</td><td>6元/小时；园林停车场1小时内6元、后每半小时3元</td></tr>
+    <tr><td>平江路</td><td>平江路南（120）；大儒巷（126）；平江实验学校（67）</td><td>约6元/小时档</td></tr>
+    <tr><td>山塘街/留园</td><td>山塘街北（305）；山塘街西（180）；金阊实验小学（140）</td><td>山塘街西：首小时4元、后1元/小时、日上限15元（UGC，现场核）</td></tr>
+  </table>
+  </div>
+  <p class="hint" style="margin-left:0">⚠️ 周末古城车位紧张（官方提醒）——<b>优先选带免费停车的酒店</b>，景点间打车比找车位省心；外围换乘场（东汇公园600泊等）节假日启用。</p>
+  <div class="src" style="margin-left:0">来源：<a href="https://www.suzhou.gov.cn/szsrmzf/mszx/202506/58fab42a1d504178a12040d6ed1338e4.shtml">苏州市政府停车攻略</a> · <a href="http://suzhou.bendibao.com/tour/201448/ly42216_3.shtm">本地宝费率</a></div>
+</section>
+
+<!-- ============ 景点菜单 ============ -->
+<section id="spots">
+  <h2>景点自选菜单</h2>
+  <p class="hint">按片区分组 · 每张卡片自带用时/票价/预约 · 两日行程从这里拼</p>
+
+  <h3 style="margin:14px 0 8px;color:var(--gold)">🏮 古城东北 · 拙政园片区</h3>
+  <div class="grid">
+    <div class="card"><h3>⭐ 拙政园 <span class="tag price">淡季70元</span></h3>
+      <p>苏州园林头牌，与苏博相邻。雨中烟雨感尤其出片（地面湿滑注意）。</p>
+      <div class="meta"><span class="tag">用时 1.5-2h</span><span class="tag">7:30-17:00（16:30停检）</span><span class="tag gold">需提前≥1天预约</span></div>
+      <div class="src">来源：<a href="https://ylj.suzhou.gov.cn/szsylj/mpjg/wztt.shtml">园林局票价</a> · <a href="http://ylj.suzhou.gov.cn/szsylj/kfsj/wztt.shtml">开放时间</a> · <a href="https://www.jfdaily.com/wx/detail.do?id=760418">上观：常约满</a></div></div>
+    <div class="card"><h3>🏛 苏州博物馆 <span class="tag price">免费</span></h3>
+      <p>贝聿铭封山之作，就在拙政园旁——<b>二选一或连着逛</b>。</p>
+      <div class="meta"><span class="tag">用时 1.5h</span><span class="tag gold">「苏博全预约」小程序提前7天放票</span></div></div>
+    <div class="card"><h3>🛶 平江路 <span class="tag price">免费</span></h3>
+      <p>水巷原住民生活线，猫的天空之城写明信片、琵琶语评弹、花神咖啡都在这。</p>
+      <div class="meta"><span class="tag">用时 1-2h（含午餐可更长）</span><span class="tag">全天开放·免预约</span></div></div>
+  </div>
+
+  <h3 style="margin:16px 0 8px;color:var(--gold)">🌿 古城西 & 西北 · 留园 / 虎丘 / 山塘</h3>
+  <div class="grid">
+    <div class="card"><h3>⭐ 留园 <span class="tag price">淡季45元</span></h3>
+      <p>四大名园之一，与拙政园风格互补；从观前街打车约 10 分钟。</p>
+      <div class="meta"><span class="tag">用时 1.5h</span><span class="tag">7:30-17:00（16:30停检）</span><span class="tag gold">可提前7日购票</span></div>
+      <div class="src">来源：园林局票价表 · <a href="http://m.suzhou.bendibao.com/tour/ly80115.shtm">本地宝购票/规则</a></div></div>
+    <div class="card"><h3>🗼 虎丘 <span class="tag price">淡季60元</span></h3>
+      <p>「到苏州不游虎丘，乃憾事」；云岩寺塔+剑池，登高望古城。</p>
+      <div class="meta"><span class="tag">用时 2h</span><span class="tag">7:30-17:30（17:00停检）</span><span class="tag gold">建议提前1天</span></div>
+      <div class="src">来源：园林局开放时间 · <a href="http://suzhou.bendibao.com/tour/2020820/ly80094.shtm">本地宝购票</a></div></div>
+    <div class="card"><h3>🏮 山塘街 <span class="tag price">免费</span></h3>
+      <p>白居易打卡的运河古街，<b>夜景 > 白天</b>；画舫游船另费约138元起（二手价，现场核）。</p>
+      <div class="meta"><span class="tag">用时 1.5-2h（含晚餐）</span><span class="tag">全天·免预约</span></div></div>
+  </div>
+
+  <h3 style="margin:16px 0 8px;color:var(--gold)">🌆 园区 · 金鸡湖片区（古城东 20-30min 车程）</h3>
+  <div class="grid">
+    <div class="card"><h3>🌊 金鸡湖 <span class="tag price">免费</span></h3>
+      <p>湖景城市天际线，含免费水上巴士；停车最宽松。</p>
+      <div class="meta"><span class="tag">用时 1-1.5h</span><span class="tag">全天·免预约</span></div>
+      <div class="src">来源：<a href="https://news.2500sz.com/doc/2025/08/16/1165669.shtml">名城苏州</a></div></div>
+    <div class="card"><h3>📚 诚品书店 <span class="tag price">免费</span></h3>
+      <p>华语文创地标，楼梯+书墙出片；逛+咖啡 1.5-2h 很合适。</p>
+      <div class="meta"><span class="tag">用时 1.5-2h</span><span class="tag gold">营业时间约10:00-22:00（未获官方确认，到场前电话核）</span></div></div>
+  </div>
+
+  <h3 style="margin:16px 0 8px;color:var(--gold)">🏘 古镇二选一（返沪方向彩蛋）</h3>
+  <div class="grid">
+    <div class="card"><h3>⭐ 周庄 <span class="tag price">8折=80元</span></h3>
+      <p>昆山、<b>返沪顺路</b>；全时段8折（含节假日）、一次玩3天，买原价票可办<b>实名终身免费入园</b>。景区 8:00-21:00。</p>
+      <div class="meta"><span class="tag">半天-1天</span><span class="tag gold">彩蛋：终身票</span></div>
+      <div class="src">来源：<a href="https://www.zhouzhuang.net/service_7.html">周庄官网</a></div></div>
+    <div class="card"><h3>同里 <span class="tag price">联票100元</span></h3>
+      <p>吴江、商业化更轻、更清净；联票含退思园，7:30前/17:00后进镇免大门票——<b>不顺路但人少</b>。</p>
+      <div class="meta"><span class="tag">半天-1天</span><span class="tag">购票：君到苏州</span></div>
+      <div class="src">来源：<a href="http://m.suzhou.bendibao.com/tour/ly66660.shtm">本地宝</a></div></div>
+  </div>
+</section>
+
+<!-- ============ 行程 ============ -->
+<section id="plan">
+  <h2>两日慢行程（弹性模板）</h2>
+  <p class="hint">周五下班出发、周末整天泡在苏州 ｜ 两日可互换 · 每段都留了缓冲 · 睡到自然醒也能跑通 · ⏰只是参考不是闹钟</p>
+
+  <div class="day">
+    <h3>Day 1 · 古城慢逛线</h3>
+    <div class="swap">主题：园林 + 水巷 + 夜山塘 ｜ 古城内全天打车/步行，不开车</div>
+    <div class="block"><span class="t">09:30</span><b>自然醒 · 出发</b><span>不赶早高峰；路上 1.5-2h，服务区休整一次</span><div class="opts">💡 周五晚已抵苏入住 → 跳过本段，直接从 11:15 开逛，上午还能睡到自然醒</div></div>
+    <div class="block"><span class="t">11:15</span><b>抵古城 · 二选一开逛</b>
+      <span>拙政园（已预约）或 苏博（已预约）</span>
+      <div class="opts">💡 都想去：先苏博（1.5h）再隔街拙政园，但会紧凑——建议只选一个，另一个留给下次</div></div>
+    <div class="block"><span class="t">13:00</span><b>平江路午餐 + 漫步</b>
+      <span>沿水巷走走停停，写字片、听评弹都算行程</span>
+      <div class="opts">餐厅三选一：囍老板（¥60）/ 桃花源记（排队王）/ 朱鸿兴面馆（¥30档）</div></div>
+    <div class="block"><span class="t">14:30</span><b>🧋 茶颜悦色 · 观前街店</b><span>步行可达；非饭点排队少；顺路回酒店放行李</span></div>
+    <div class="block"><span class="t">15:30</span><b>自由时段（三选一）</b>
+      <div class="opts">A 留园（¥45·提前购票）｜B 回酒店躺 1 小时 ｜C 平江路评弹馆听一场</div></div>
+    <div class="block"><span class="t">17:30</span><b>山塘街 · 夜景 + 晚餐</b>
+      <span>灯笼亮起后最好看</span>
+      <div class="opts">晚餐二选一：满桂芳（¥90·松鼠桂鱼）/ 随缘小馆；可加画舫游船（约138起）</div></div>
+    <div class="block"><span class="t">20:00</span><b>回酒店 · 看情况加一场</b><span>有力气去听平江路夜评弹，没力气直接躺——都对</span></div>
+  </div>
+
+  <div class="day">
+    <h3>Day 2 · 东扩返程线</h3>
+    <div class="swap">主题：虎丘 + 湖区 + 从容回家 ｜ 返程避开 15:00-20:00 高峰</div>
+    <div class="block"><span class="t">09:30</span><b>自然醒 · 酒店早餐</b><span>不退房可以寄存行李再出门</span></div>
+    <div class="block"><span class="t">10:30</span><b>虎丘（可跳过）</b>
+      <span>2h 登高收尾；不想爬山就直接跳到下一段</span>
+      <div class="opts">💡 跳过虎丘 → 多出 2h，给诚品/金鸡湖或周庄</div></div>
+    <div class="block"><span class="t">12:30</span><b>观前街午餐（正餐版）</b>
+      <div class="opts">老字号：松鹤楼（¥150·松鼠桂鱼）/ 得月楼（¥150·等位久）｜ 平价：山海焗（¥70）/ 同得兴面馆</div></div>
+    <div class="block"><span class="t">14:00</span><b>金鸡湖 + 诚品书店</b><span>湖边走走 + 书店泡 1.5h；停车宽松</span></div>
+    <div class="block"><span class="t">16:00 前</span><b>启程返沪</b>
+      <span>早出发避开 15:00-20:00 高峰；雨天再提前</span>
+      <div class="opts">💡 想加周庄：16:00 先去周庄（顺路昆山）玩到 18:30，19:30 后出发 = 错峰到家 21:30</div></div>
+    <div class="block"><span class="t">18:30</span><b>预计到家</b><span>雨天 + 路况顺延 30-60min 属正常，别催</span></div>
+  </div>
+
+  <h3 style="margin:14px 0 8px;color:var(--gold)">🎛 弹性开关（按心情改）</h3>
+  <div class="switch">
+    <div class="sw"><b>☔ 下雨备案</b>Day1 改「苏博 → 平江路室内午餐 → 评弹 → 酒店」；游船、虎丘取消，山塘夜景雨中撑伞也别有味道。</div>
+    <div class="sw"><b>😴 躺平版</b>每天只排 1 个主景点，其余睡饱 + 吃好 + 逛街；茶颜和山塘夜景保留，其余随缘。</div>
+    <div class="sw"><b>⏱ 只有一天</b>砍掉虎丘和园区：拙政园 → 平江路午餐 → 茶颜 → 留园 → 山塘夜景，当晚返沪。</div>
+    <div class="sw"><b>🏯 加古镇</b>Day2 换成「周庄一整天」（80元·顺路），返沪改 19:30 后出发错峰。</div>
+  </div>
+</section>
+
+<!-- ============ 茶颜悦色 ============ -->
+<section id="tea">
+  <h2>🧋 茶颜悦色 · 苏州门店</h2>
+  <p class="hint">2024-09-28 三店同开进驻苏州（南京、无锡后江苏第三城），后持续扩张</p>
+  <div class="grid">
+    <div class="card" style="border-color:#d9c9a8;background:#fffdf7"><h3><span class="star">★</span> 观前街店（游园会店型）<span class="tag gold">本次首选</span></h3>
+      <p>姑苏区观前街商圈，<b>离平江路步行可达</b>，正好嵌在 Day1 行程里。</p>
+      <div class="meta"><span class="tag">人均 15-20 元</span><span class="tag">周末常排队 → 非饭点去</span></div></div>
+    <div class="card"><h3>仁恒仓街店（茶叶子店型）</h3><p>茶叶 + 文创周边专卖，顺路可逛。</p></div>
+    <div class="card"><h3>星悦汇店（工业园区）</h3><p>在园区方向——Day2 逛金鸡湖时顺路补一杯。</p></div>
+    <div class="card"><h3>🥤 情侣点单建议</h3>
+      <p><b>幽兰拿铁 + 声声乌龙</b> 各一杯，配苏州城市限定周边（冰箱贴/明信片）。</p>
+      <div class="src">来源：<a href="https://m.winshang.com/news727955.html">赢商网</a> · <a href="http://finance.people.com.cn/n1/2024/1011/c1004-40337041.html">人民网</a>；⚠️ 当日营业/排队出发前大众点评核</div></div>
+  </div>
+</section>
+
+<!-- ============ 吃什么 ============ -->
+<section id="food">
+  <h2>吃什么 · 自选清单</h2>
+  <p class="hint">正餐 / 面点小吃 / 打卡小馆 三组 · 人均为参考价</p>
+
+  <h3 style="margin:14px 0 8px;color:var(--gold)">🍶 正餐（苏帮菜老字号 & 本地馆）</h3>
+  <div class="grid">
+    <div class="card"><h3>松鹤楼（观前店）<span class="tag price">人均¥150</span></h3><p>乾隆创始（1757），太监弄72号；<b>松鼠桂鱼</b>、蟹粉豆腐。宴请排面之选。</p></div>
+    <div class="card"><h3>得月楼（观前店）<span class="tag price">人均¥150</span></h3><p>400年老字号、太监弄43号；清炒虾仁、蟹粉芙蓉盅。<b>周末等位久，早去或拿号后逛</b>。</p></div>
+    <div class="card"><h3>山海焗苏帮菜 <span class="tag price">人均¥70</span></h3><p>观前旁丁家巷，本地人常去；砂锅苏州菜、太湖大虾。<b>性价比之选</b>。</p></div>
+    <div class="card"><h3>囍老板苏州菜 <span class="tag price">人均¥60</span></h3><p>临顿路站5号口（平江路边）；土灶家常菜，蟹黄虾仁粉丝煲——Day1 午餐顺路。</p></div>
+  </div>
+
+  <h3 style="margin:16px 0 8px;color:var(--gold)">🍜 面馆 & 小吃</h3>
+  <div class="grid">
+    <div class="card"><h3>朱鸿兴 <span class="tag price">¥20-30</span></h3><p>1938年老字号（观前）；虾仁大排面、焖蹄浇头。</p></div>
+    <div class="card"><h3>同得兴（嘉馀坊店）<span class="tag price">¥25-40</span></h3><p>焖肉、爆鱼红汤面；比松鹤楼面馆便宜 2-3 成，近观前街。</p></div>
+    <div class="card"><h3>哑巴生煎 <span class="tag price">¥15-25</span></h3><p>临顿路温家岸12号，<b>米其林指南收录</b>；鲜肉生煎汤汁足微甜，<b>饭点必排队</b>。</p>
+      <div class="src">来源：<a href="https://guide.michelin.com/sg/zh_CN/jiang-su/suzhou_1031079/restaurant/ya-ba-sheng-jian-wenjia-an">米其林指南</a></div></div>
+    <div class="card"><h3>桃花源记 <span class="tag price">¥30-50</span></h3><p>平江路「排队王」；赤豆糊小圆子、桃源熟醉蟹、八仙鸡汤馄饨12元。</p>
+      <div class="src">来源：<a href="https://www.jfdaily.com/wx/detail.do?id=744464">上观新闻</a></div></div>
+  </div>
+
+  <h3 style="margin:16px 0 8px;color:var(--gold)">☕ 情侣打卡小馆</h3>
+  <div class="grid">
+    <div class="card"><h3>猫的天空之城（平江路）</h3><p>写明信片寄给未来 + 咖啡，夜景窗台出片。</p></div>
+    <div class="card"><h3>花神咖啡（平江路）</h3><p>欧风建筑，拿铁 + 甜点，环境清幽。</p></div>
+    <div class="card"><h3>琵琶语评弹馆（平江路）</h3><p>临河点茶听《声声慢》，江南氛围感拉满——Day1 自由时段或夜场。</p></div>
+    <div class="card"><h3>满桂芳（山塘街）<span class="tag price">人均¥90</span></h3><p>现做松鼠桂鱼，夜游山塘后的正餐备选。</p></div>
+  </div>
+  <div class="src" style="margin-left:0">美食来源汇总：<a href="https://post.smzdm.com/p/axkg2w83">什么值得买（点评汇总）</a> · <a href="https://you.ctrip.com/food/11/4925257.html">携程·朱鸿兴</a> · <a href="https://heidihihi.com/苏州三大街區攻略">平江路攻略</a> · TripAdvisor</div>
+</section>
+
+<!-- ============ 住哪里 ============ -->
+<section id="stay">
+  <h2>住哪里 · 四区对比</h2>
+  <p class="hint">开车优先「免费停车」；价位为参考区间，预订前以 App 实价为准</p>
+
+  <div class="tblwrap">
+  <table>
+    <tr><th>区域</th><th>适合谁</th><th>优缺点</th></tr>
+    <tr><td><b>观前街</b> ⭐推</td><td>第一次来 / 吃货 / 行程居中</td><td>餐饮最密、步行10min到平江路、到留园打车10min；热闹偏商业化</td></tr>
+    <tr><td><b>平江路</b></td><td>拍照党 / 水巷氛围</td><td>夜游最出片、近拙政园；⚠️停车紧张</td></tr>
+    <tr><td><b>山塘街</b></td><td>运河夜景控 / 近火车站</td><td>夜景好；游客较多</td></tr>
+    <tr><td><b>金鸡湖</b></td><td>湖景酒店控 / Day2 顺路</td><td>停车最宽松、硬件新；⚠️离古城20-30min车程</td></tr>
+  </table>
+  </div>
+
+  <div class="grid" style="margin-top:14px">
+    <div class="card"><h3>⭐ 全季观前步行街店 <span class="tag price">¥550-650</span></h3><p><b>免费停车</b>，Agoda 8.8；居中性价比首选。</p></div>
+    <div class="card"><h3>观前街平江路漫心酒店 <span class="tag price">¥500-700</span></h3><p>携程 4.7/2177条，近乐桥地铁站。</p></div>
+    <div class="card"><h3>拙政园漫心府 <span class="tag price">¥800-1200</span></h3><p>Trip 9.5/1169条，园林建筑、<b>免费停车</b>——想住好点选它，就在 Day1 行程旁。</p></div>
+    <div class="card"><h3>花间堂·探花府 <span class="tag price">¥700-1000</span></h3><p>潘氏老宅改建，设计感民宿。</p></div>
+    <div class="card"><h3>石路山塘街美居 <span class="tag price">¥450-650</span></h3><p>携程5761条「超棒」；近山塘夜景。</p></div>
+    <div class="card"><h3>囍住美院 <span class="tag price">¥400-500</span></h3><p>预算档，山塘街片区。</p></div>
+    <div class="card"><h3>金鸡湖英迪格 <span class="tag price">¥900-1300</span></h3><p>有停车场，园区湖景档。</p></div>
+    <div class="card"><h3>金鸡湖万豪 <span class="tag price">约¥710起</span></h3><p>Booking 8.6，稳妥大牌之选。</p></div>
+  </div>
+  <p class="hint" style="margin-left:0">⚠️ 房价为搜索快照折算的参考区间（OTA 实时比价受限），<b>预订前请以携程/美团实价为准</b>。</p>
+</section>
+
+<!-- ============ 预算与清单 ============ -->
+<section id="budget">
+  <h2>预算 & 出发前清单</h2>
+  <div class="grid">
+    <div class="card"><h3>💰 两人预算（参考）</h3>
+      <div class="tblwrap"><table>
+        <tr><th>项</th><th>金额</th></tr>
+        <tr><td>交通（过路+油·往返）</td><td>¥200-240</td></tr>
+        <tr><td>停车（两天）</td><td>¥60-100（酒店免费则更低）</td></tr>
+        <tr><td>门票（拙政70×2+留园45×2+虎丘60×2）</td><td><b>¥350</b>（学生证半价另省；游船+276可选）</td></tr>
+        <tr><td>餐饮（含茶颜）</td><td>¥500-600</td></tr>
+        <tr><td>住宿</td><td>¥550-1200</td></tr>
+        <tr><td><b>合计</b></td><td><b class="star">约 ¥1,650-2,350</b></td></tr>
+      </table></div></div>
+    <div class="card"><h3>✅ 出发前清单</h3>
+      <ul class="clean check">
+        <li>拙政园预约（提前≥1天，每单1张）</li>
+        <li>苏博预约（想去就提前7天放票时抢）</li>
+        <li>留园 / 虎丘 购票（可提前7日）</li>
+        <li>订酒店（免费停车优先）</li>
+        <li>查苏州天气 + 苏州交警周末提醒</li>
+        <li>大众点评核对茶颜门店营业/排队</li>
+        <li>诚品书店电话确认营业时间</li>
+        <li>带伞、薄外套、防滑鞋、身份证</li>
+      </ul></div>
+  </div>
+</section>
+
+<!-- ============ 注意事项 ============ -->
+<section id="tips">
+  <h2>注意事项</h2>
+  <ul class="clean">
+    <li><b>爽约红线</b>：实名票按约到场，退票赶在游览日前一日 24:00 前——一周爽约2次会被禁约30天</li>
+    <li><b>古城单行</b>：潘儒巷禁行、白塔西路东→西单行、西北街西→东单行——跟着导航，拙政园周边预留20分钟找位</li>
+    <li><b>开车原则</b>：古城内景点间打车/步行为主，酒店免费停车 + 景点停车场组合最省心</li>
+    <li><b>返程错峰</b>：15:00-20:00 是返沪高峰，16:00 前上高速或 20:30 后出发；雨天夜行再提前</li>
+    <li><b>周末活动</b>：演唱会/展会场馆周边 18:30-21:30 易堵，出发前看苏州交警发布</li>
+    <li><b>雨天照玩</b>：园林雨景是加分项，石阶湿滑慢走；游船、虎丘可临场取消，室内备案见「弹性开关」</li>
+    <li><b>价格核对</b>：本文票价/时间为 11 月淡季参考 + 二手来源处已标注，出发前以官方渠道为准</li>
+  </ul>
+</section>
+
+<!-- ============ 来源 ============ -->
+<section id="sources">
+  <h2>信息来源</h2>
+  <p class="hint">点开逐条核对 · 官方源优先 · 二手/UGC 已标注</p>
+  <details><summary>🏛 官方（政策/票价/时间/停车）</summary><ul>
+    <li>苏州市政府 · 古城外地车限行取消通告：https://www.suzhou.gov.cn/szsrmzf/mszx/202512/317404a496ef4f8d8a98fbf7d17e0ac0.shtml</li>
+    <li>苏州市政府 · 景点停车攻略：https://www.suzhou.gov.cn/szsrmzf/mszx/202506/58fab42a1d504178a12040d6ed1338e4.shtml</li>
+    <li>苏州市园林局 · 票价表：https://ylj.suzhou.gov.cn/szsylj/mpjg/wztt.shtml ｜ 开放时间：http://ylj.suzhou.gov.cn/szsylj/kfsj/wztt.shtml</li>
+    <li>周庄官网票务：https://www.zhouzhuang.net/service_7.html</li>
+    <li>米其林指南 · 哑巴生煎：https://guide.michelin.com/sg/zh_CN/jiang-su/suzhou_1031079/restaurant/ya-ba-sheng-jian-wenjia-an</li>
+    <li>上海市公安局 · 出行攻略：https://gaj.sh.gov.cn/shga/wzXxfbGj/detail?pa=110ef360e4374a417b3cc1e225a8ffabe36a90809a385fdef3ab48511424362d</li>
+  </ul></details>
+  <details><summary>📰 官方媒体 / 行业媒体</summary><ul>
+    <li>人民网 · 茶颜悦色苏州三店同开：http://finance.people.com.cn/n1/2024/1011/c1004-40337041.html</li>
+    <li>赢商网 · 茶颜悦色门店扩张：https://m.winshang.com/news727955.html</li>
+    <li>名城苏州 · 景区预约政策 / 金鸡湖：https://news.2500sz.com/doc/2025/04/29/1148315.shtml ｜ https://news.2500sz.com/doc/2025/08/16/1165669.shtml</li>
+    <li>上观新闻 · 拙政园约满：https://www.jfdaily.com/wx/detail.do?id=760418 ｜ 桃花源记：https://www.jfdaily.com/wx/detail.do?id=744464</li>
+    <li>上海发布/人民网 · 沪苏路线耗时：http://sh.people.com.cn/n2/2023/0308/c176737-40329283.html</li>
+    <li>苏州本地宝 · 购票/爽约/停车费率：http://m.suzhou.bendibao.com/tour/ly80115.shtm ｜ http://suzhou.bendibao.com/tour/201448/ly42216_3.shtm</li>
+    <li>天气：https://tianqi.so.com/weather/101190401 ｜ https://m.weather.com.cn/mweather15d/101190401.shtml（出发前复查）</li>
+  </ul></details>
+  <details><summary>🧭 二手 / UGC（已标注，现场复核）</summary><ul>
+    <li>什么值得买 · 苏帮菜点评汇总：https://post.smzdm.com/p/axkg2w83</li>
+    <li>携程 · 朱鸿兴：https://you.ctrip.com/food/11/4925257.html</li>
+    <li>TripAdvisor · 哑巴生煎：https://cn.tripadvisor.com/Restaurant_Review-g297442-d3786853-Reviews-YaBa_ShengJian-Suzhou_Jiangsu.html</li>
+    <li>平江路攻略：https://heidihihi.com/苏州三大街區攻略 ｜ 山塘停车/游船（去哪儿UGC）：https://travelnews.qunar.com/ugc/suzhou-selfdrive-shantang-flowers</li>
+    <li>房价：Agoda/携程/Booking 搜索快照折算，未实时比价——以 App 实价为准</li>
+    <li>同里取舍参考：GoChinaTravel（二手）</li>
+  </ul></details>
+</section>
+
+<footer>
+  📮 本手册基于 2026-11-13 完成的多源联网调研整理 · 票价按 11 月淡季 · 出发前请复查天气/预约/营业时间<br>
+  祝两个人玩得慢一点、开心一点 🪷
+</footer>
+
+</div>
+</body>
+</html>
