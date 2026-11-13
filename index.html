@@ -3,439 +3,346 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>苏州慢游 · 江南双日手册</title>
+<title>苏州慢游 · 交互行程手册</title>
 <style>
-:root{
-  --paper:#faf7f0; --card:#ffffff; --ink:#2b3a34; --pine:#2f5d4f; --pine-soft:#eef4f1;
-  --cinnabar:#c0453a; --gold:#a97c2f; --line:#e7e0d3; --muted:#7a857f;
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-  line-height:1.7;font-size:15px;padding-bottom:calc(24px + env(safe-area-inset-bottom))}
-h1,h2,h3{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-weight:700;color:var(--pine)}
-a{color:var(--pine)}
+:root{--paper:#faf6ee;--ink:#2f3e35;--soft:#6b7a70;--accent:#b4552d;--gold:#a98b4f;--line:#e6ddcb;--card:#fffef9;--chip:#f1ead9;--hi:#eaf2ec}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
 .wrap{max-width:860px;margin:0 auto;padding:0 16px}
-
-/* hero */
-header{background:linear-gradient(160deg,#2f5d4f 0%,#3d6e5e 55%,#527f6b 100%);color:#f4efe4;
-  padding:calc(34px + env(safe-area-inset-top)) 16px 26px;text-align:center;position:relative;overflow:hidden}
-header::after{content:"🪷";position:absolute;right:14px;bottom:6px;font-size:54px;opacity:.14}
-header .sub{font-size:13px;letter-spacing:.35em;opacity:.85;margin-bottom:8px}
-header h1{color:#fff;font-size:30px;margin:0 0 6px;letter-spacing:.08em}
-header p{margin:6px 0 0;opacity:.9;font-size:14px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
-.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:999px;
-  padding:4px 12px;font-size:12.5px;backdrop-filter:blur(2px)}
-
-/* nav */
-nav{position:sticky;top:0;z-index:20;background:rgba(250,247,240,.94);backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
-nav::-webkit-scrollbar{display:none}
-nav .inner{display:inline-flex;gap:6px;padding:9px 14px}
-nav a{flex:none;font-size:13px;color:var(--pine);text-decoration:none;background:var(--pine-soft);
-  border-radius:999px;padding:5px 13px;border:1px solid #dcebe4}
-nav a:active{background:#dcebe4}
-
-section{padding:26px 0 4px}
-h2{font-size:21px;margin:0 0 4px;padding-left:12px;border-left:4px solid var(--cinnabar)}
-.hint{color:var(--muted);font-size:13px;margin:2px 0 14px 16px}
-
-.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(285px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px;
-  box-shadow:0 1px 4px rgba(43,58,52,.05)}
-.card h3{margin:0 0 6px;font-size:16.5px}
-.card p{margin:5px 0;font-size:14px}
-.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.tag{display:inline-block;background:var(--pine-soft);color:var(--pine);border-radius:999px;
-  padding:2px 10px;font-size:12px;border:1px solid #dcebe4}
-.tag.price{background:#fbeee9;color:var(--cinnabar);border-color:#f3d9d2}
-.tag.gold{background:#f8f1e2;color:var(--gold);border-color:#eddfc2}
-.src{font-size:11.5px;color:var(--muted);margin-top:8px}
-.src a{color:#9aa8a1;text-decoration:none;border-bottom:1px dotted #c9d2cd}
-.star{color:var(--cinnabar)}
-
-/* timeline */
-.day{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 16px 8px;margin-bottom:14px}
-.day h3{margin:0 0 2px;font-size:17px}
-.day .swap{font-size:12px;color:var(--gold);margin-bottom:10px}
-.block{position:relative;padding:0 0 16px 74px;border-left:2px dashed #d8e2dc;margin-left:56px}
-.block:last-child{border-left-color:transparent}
-.block::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;
-  background:var(--pine);border:2px solid var(--paper)}
-.t{position:absolute;left:-56px;top:0;width:44px;text-align:right;font-size:12.5px;color:var(--cinnabar);font-weight:600}
-.block b{display:block;font-size:15px;color:var(--pine)}
-.block span{font-size:13.5px;color:#51605a}
-.opts{font-size:13px;color:var(--gold);margin-top:3px}
-
-.switch{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(255px,1fr))}
-.sw{background:#fdfcf8;border:1.5px dashed #d9c9a8;border-radius:14px;padding:12px 14px;font-size:13.5px}
-.sw b{color:var(--gold);display:block;margin-bottom:4px;font-size:14.5px}
-
-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
-  border-radius:14px;overflow:hidden;font-size:13.5px}
-th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{background:var(--pine-soft);color:var(--pine);font-size:12.5px}
-tr:last-child td{border-bottom:none}
-.tblwrap{overflow-x:auto;border-radius:14px}
-
-ul.clean{margin:8px 0;padding-left:0;list-style:none}
-ul.clean li{padding:7px 0 7px 26px;position:relative;font-size:14px;border-bottom:1px dashed #ece5d8}
-ul.clean li:last-child{border-bottom:none}
-ul.clean li::before{content:"✦";position:absolute;left:6px;color:var(--cinnabar);font-size:12px}
-
-.check{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 16px}
-.check li::before{content:"☑";color:var(--pine);font-size:15px}
-.check li{border-bottom:1px dashed #ece5d8}
-
-details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:10px}
-summary{cursor:pointer;font-weight:600;color:var(--pine);font-size:14.5px}
-details li{font-size:12.5px;color:#66716b;word-break:break-all;margin:6px 0}
-.callout{background:#fbeee9;border:1px solid #f0d5cd;border-radius:14px;padding:12px 16px;font-size:13.5px;margin:12px 0}
-.callout b{color:var(--cinnabar)}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:26px 16px 10px;line-height:1.9}
+header{background:linear-gradient(160deg,#2f3e35 0%,#3d5347 60%,#4a6253 100%);color:#f5f1e6;padding:44px 16px 34px;text-align:center;position:relative;overflow:hidden}
+header::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,.08),transparent 50%)}
+.kicker{letter-spacing:.35em;font-size:12px;opacity:.75;text-transform:uppercase}
+h1{font-family:"Noto Serif SC","Songti SC",STSong,serif;font-size:34px;margin:10px 0 6px;font-weight:700}
+.sub{font-size:14px;opacity:.85}
+.pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.pill{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 12px;font-size:12px}
+nav{position:sticky;top:0;z-index:50;background:rgba(250,246,238,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;gap:4px;overflow-x:auto;max-width:860px;margin:0 auto;padding:8px 12px;scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav-in a{flex:0 0 auto;text-decoration:none;color:var(--ink);font-size:13px;padding:6px 12px;border-radius:999px;background:var(--chip)}
+.nav-in a:hover{background:var(--hi)}
+section{padding:34px 0 6px}
+h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:23px;margin-bottom:6px;padding-left:12px;border-left:4px solid var(--accent)}
+.lead{color:var(--soft);font-size:14px;margin:4px 0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;margin-bottom:14px;box-shadow:0 1px 3px rgba(47,62,53,.05)}
+.rec-banner{background:linear-gradient(135deg,#eef4ef,#f7f3e8);border:1px solid #cfe0d3;border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.rec-banner b{color:#2f6b46}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.note{background:#fdf8ec;border:1px solid #ecdcb8;border-radius:12px;padding:12px 14px;font-size:13.5px;margin:12px 0}
+.warn{background:#fbeee9;border-color:#eac9b8}
+.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;margin-left:6px;vertical-align:2px}
+.tag.rec{background:#2f6b46;color:#fff}
+.tag.hot{background:var(--accent);color:#fff}
+.tag.res{background:#8a6d1f;color:#fff}
+.tag.bad{background:#9a5b4a;color:#fff}
+h3{font-family:"Noto Serif SC","Songti SC",serif;font-size:17.5px;margin:2px 0 8px}
+/* ---- 行程 slot ---- */
+.dayhead{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:22px 0 10px}
+.dayhead h3{font-size:19px;margin:0}
+.daymeta{font-size:12.5px;color:var(--soft)}
+.slot{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.slot.sel-slot{border-color:#bcd2c2;box-shadow:0 0 0 2px #e7f0e9}
+.s-top{display:flex;gap:10px;align-items:flex-start;padding:13px 14px 8px}
+.s-time{flex:0 0 auto;font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);font-size:14.5px;min-width:86px;line-height:1.5}
+.s-body{flex:1;min-width:0}
+.s-label{font-size:11.5px;color:var(--soft);letter-spacing:.1em}
+.s-name{font-weight:700;font-size:15.5px}
+.s-name .ic{margin-right:4px}
+.s-sub{font-size:12.5px;color:var(--soft);margin-top:2px}
+.transit{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--soft);padding:0 14px 8px 110px}
+.transit .arrow{color:var(--gold);font-weight:700}
+.chips{display:flex;gap:7px;flex-wrap:wrap;padding:0 14px 12px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:5px 13px;font-size:13px;cursor:pointer;color:var(--ink);transition:.15s}
+.chip:hover{border-color:#a8c4ae}
+.chip.on{background:#2f6b46;border-color:#2f6b46;color:#fff;font-weight:600}
+.chip.alt{background:var(--chip)}
+.detail{border-top:1px dashed var(--line);padding:11px 14px 13px;font-size:13.5px;background:#fffdf7}
+.detail .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:7px;font-size:12.5px;color:var(--soft)}
+.detail .badge{background:var(--chip);border-radius:6px;padding:2px 8px}
+.detail .badge.money{background:#f6ecdc;color:#8a5a1d}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+@media(max-width:520px){.pc{grid-template-columns:1fr}}
+.pc div{font-size:12.8px;line-height:1.55;padding:8px 10px;border-radius:9px}
+.pc .pro{background:#eef4ef;border:1px solid #d7e6da}
+.pc .con{background:#faf0eb;border:1px solid #ecd9cf}
+.pc b{display:block;font-size:11.5px;letter-spacing:.15em;margin-bottom:3px}
+.pc .pro b{color:#2f6b46}.pc .con b{color:#a05a3f}
+.res{margin-top:8px;font-size:12.5px;background:#fdf6e6;border:1px solid #ecdcab;border-radius:8px;padding:7px 10px}
+details.cmp{border-top:1px solid var(--line);background:#fbf8f0}
+details.cmp summary{cursor:pointer;padding:9px 14px;font-size:12.5px;color:var(--soft);user-select:none}
+details.cmp summary:hover{color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:12.3px}
+th,td{padding:7px 8px;text-align:left;border-top:1px solid var(--line);vertical-align:top}
+th{background:#f4efe2;font-weight:600;white-space:nowrap}
+tr.on td{background:var(--hi)}
+td.pick{cursor:pointer;color:var(--accent);font-weight:600;white-space:nowrap}
+td .mini{display:block;color:var(--soft);font-weight:400;font-size:11.5px}
+.dayfoot{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:#f4efe2;border-radius:12px;padding:11px 14px;font-size:13px;margin:4px 0 18px}
+.dayfoot b{font-variant-numeric:tabular-nums}
+.btn{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:5px 14px;font-size:13px;cursor:pointer;color:var(--ink)}
+.btn:hover{border-color:#a8c4ae}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#2f3e35;color:#fff;padding:10px 20px;border-radius:999px;font-size:13.5px;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.sumbar{position:sticky;top:47px;z-index:40;background:rgba(47,62,53,.97);color:#f0ece0;border-radius:12px;padding:10px 14px;margin:10px 0 16px;display:flex;gap:14px;flex-wrap:wrap;font-size:12.8px;align-items:center}
+.sumbar b{color:#ffd98a;font-variant-numeric:tabular-nums}
+ul.tight{margin:6px 0 0 18px;font-size:13.5px}
+ul.tight li{margin:4px 0}
+.srcs{font-size:12.3px;color:var(--soft);word-break:break-all}
+.srcs a{color:#4a6d5a;text-decoration:none;border-bottom:1px dotted #a8c4ae;margin-right:8px}
+footer{text-align:center;padding:34px 16px 44px;color:var(--soft);font-size:12.5px}
+.hl{background:linear-gradient(transparent 60%,#ffe9a8 60%)}
+@media(max-width:520px){h1{font-size:28px}.s-time{min-width:74px;font-size:13.5px}.transit{padding-left:96px}}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="sub">SUZHOU · 慢游双日</div>
-  <h1>江南双日 · 慢游手册</h1>
-  <p>上海出发自驾 1.5h · 园林 / 水巷 / 茶点 / 老字号<br>不赶路、多选择、说走就走</p>
-  <div class="chips">
-    <span class="chip">🚗 浦东出发 100km</span>
-    <span class="chip">🎫 11月淡季票价</span>
-    <span class="chip">✅ 古城外地车不限行</span>
-    <span class="chip">🧋 茶颜悦色已进驻</span>
-  </div>
+  <div class="kicker">SHANGHAI → SUZHOU · 自驾 100km</div>
+  <h1>苏州慢游 · 交互行程</h1>
+  <div class="sub">周五晚抵达 · 周六周日两天 · 推荐主线 + 可替换项，点一下行程就跟着变</div>
+  <div class="pills"><span class="pill">🚗 沪牌自驾 ·古城限行已取消</span><span class="pill">🎫 约¥1,650-2,400/两人</span><span class="pill">🌤 出发前1天复查天气</span></div>
 </header>
-
-<nav><div class="inner">
-  <a href="#before">行前须知</a><a href="#go">交通停车</a><a href="#spots">景点菜单</a>
-  <a href="#plan">两日行程</a><a href="#tea">茶颜悦色</a><a href="#food">吃什么</a>
-  <a href="#stay">住哪里</a><a href="#budget">预算清单</a><a href="#tips">注意</a><a href="#sources">来源</a>
+<nav><div class="nav-in">
+  <a href="#brief">主线速览</a><a href="#before">行前必办</a><a href="#d0">周五晚</a><a href="#d1">周六</a><a href="#d2">周日</a><a href="#food">吃什么</a><a href="#stay">住哪里</a><a href="#rain">雨天备案</a><a href="#src">来源</a>
 </div></nav>
 
 <div class="wrap">
 
-<!-- ============ 行前须知 ============ -->
+<section id="brief">
+  <h2>推荐主线 · 一眼看完</h2>
+  <p class="lead">这是默认走法（下面每个环节都可以点选替换，时间轴会自动重排）：</p>
+  <div class="rec-banner">
+    <b>周五</b> 18:30 抵达入住 → 观前街夜宵（或山塘夜游船 / 金鸡湖喷泉·周五限定）<br>
+    <b>周六</b> 7:45 出发 → <b>拙政园 8:00 前入园抢空镜</b> → 苏博（步行6分钟）→ 平江路午餐 → 平江路慢逛+评弹 → 山塘街夜景+游船<br>
+    <b>周日</b> 8:30 → 虎丘（游1路/打车20分钟）→ 观前街午餐+买手信 → <b>16:30 出发返沪避堵</b>（18:00 前到家）
+  </div>
+  <div class="note"><b>与攻略的差异：</b>主流两日线是「Day1 拙政园→苏博→狮子林→平江路，Day2 留园→虎丘→山塘」。本手册把<b>山塘夜景挪到周六晚</b>（17:00 进、20:00 后人少，比周日赶场舒服），<b>周日只留虎丘一个大点</b>，给返程和手信留足余量——时间更松、不赶。</div>
+</section>
+
 <section id="before">
-  <h2>行前须知</h2>
-  <p class="hint">出发前一晚花 10 分钟过一遍</p>
+  <h2>行前必办 · 今晚就约</h2>
+  <p class="lead">三个预约不做，主线会卡壳：</p>
   <div class="grid">
-    <div class="card"><h3>🎫 淡季票价（1/2/3/6/11/12月）</h3>
-      <p>拙政园 <b class="star">70元</b> · 虎丘 <b class="star">60元</b> · 留园 <b class="star">45元</b>（旺季更贵）；山塘街、平江路、金鸡湖 <b>免费</b>。</p>
-      <div class="src">来源：苏州市园林局官网 <a href="https://ylj.suzhou.gov.cn/szsylj/mpjg/wztt.shtml">票价表</a></div></div>
-    <div class="card"><h3>📝 预约规则</h3>
-      <p>园林<b>实名分时预约</b>，可提前 7 天；<b>拙政园周末常约满 → 至少提前 1 天</b>。每单限 1 张、当天有效、凭身份证核验。</p>
-      <p style="font-size:13px;color:#a0523f">⚠️ 爽约：当日退票记爽约，一周 2 次 → 30 天内禁约；退票赶在游览日前一日 24:00 前。</p>
-      <div class="src">渠道：「君到苏州」小程序 /「苏州园林旅游」公众号</div></div>
-    <div class="card"><h3>🚙 古城限行（已放宽）</h3>
-      <p><b>2026-01-06 起古城四项外地车限行全部取消</b>——外地蓝牌小客车全天可进古城，无尾号限行。</p>
-      <div class="src">来源：<a href="https://www.suzhou.gov.cn/szsrmzf/mszx/202512/317404a496ef4f8d8a98fbf7d17e0ac0.shtml">苏州市政府通告</a></div></div>
-    <div class="card"><h3>🧱 但小巷收紧了</h3>
-      <p><b>潘儒巷全天禁行</b>；白塔西路全天东→西单行；西北街西→东单行；狮林寺巷部分禁行——都在景点周边，<b>务必跟着导航走单行线</b>。</p>
-      <div class="src">来源：同上官方通告</div></div>
-    <div class="card"><h3>🌦 11月天气</h3>
-      <p>典型：13~19°C，湿冷、多阴雨。<b>带伞 + 薄外套/风衣 + 防滑鞋</b>。具体预报出发前 1 天再查（苏州 11 月中旬常有小雨）。</p></div>
-    <div class="card"><h3>🎪 出发前查一眼</h3>
-      <p>周末如有演唱会/展会，晚间场馆周边会堵——<b>出发前看一眼「苏州交警」发布</b>，绕开 18:30-21:30 场馆路段。</p></div>
+    <div class="card"><h3>🎫 拙政园 <span class="tag res">今晚约</span></h3><p style="font-size:13.5px">提前 ≥1 天实名分时预约，<b>选 8:00 前场次</b>（7:30 开园，8 点前入园几乎没人）。周末常约满，放票即抢。</p></div>
+    <div class="card"><h3>🏛 苏州博物馆 <span class="tag res">今晚约</span></h3><p style="font-size:13.5px">公众号「苏州博物馆」提前 7 天预约，9:00-17:00、<b>周一闭馆</b>、免费。周末票紧张，现场排队常 30 分钟起。</p></div>
+    <div class="card"><h3>🗼 虎丘登塔 <span class="tag res">现场约</span></h3><p style="font-size:13.5px">云岩寺塔登塔每天限流，<b>到现场预约</b>；免费电子讲解器 8:00-16:00 整点发放、每批 20 台，进园先抢。</p></div>
   </div>
+  <div class="note warn"><b>自驾停车：</b>古城景点周边别硬钻。方案A <b>P+R 换乘</b>——东汇公园（600 位）/ 平海路 P+R（1,600 位）/ 苏站路（400+80 位），换乘旅游公交专线接驳拙政园片区（返程专线 8:30-20:00）。方案B 住观前/平江一带，<b>酒店停好全程步行</b>（核心景点都在 5-10 分钟圈内）。<br>⚠ 小巷管制：潘儒巷全天禁行（艺圃在里面，只能步行进）；白塔西路、西北街为单行，一律听导航。</div>
 </section>
 
-<!-- ============ 交通停车 ============ -->
-<section id="go">
-  <h2>交通与停车</h2>
-  <p class="hint">两条路线二选一，古城内景点间距都在打车起步价级</p>
-  <div class="grid">
-    <div class="card"><h3>🛣 路线 A · G2 京沪（主选）</h3>
-      <p>浦东 → S20 外环 → G2，约 <b>100-110km</b>，顺畅 <b>1.5-2h</b>。</p>
-      <p style="font-size:13px">瓶颈：中环万镇路入口 6 车道并 2 车道 → <b>可走 S6 绕开</b>。</p>
-      <div class="src">来源：<a href="http://sh.people.com.cn/n2/2023/0308/c176737-40329283.html">上海发布/人民网</a>、<a href="https://gaj.sh.gov.cn/shga/wzXxfbGj/detail?pa=110ef360e4374a417b3cc1e225a8ffabe36a90809a385fdef3ab48511424362d">上海公安局出行攻略</a></div></div>
-    <div class="card"><h3>🛤 路线 B · S26 沪常（备选）</h3>
-      <p>更靠南、通常车少，到苏州南部约 <b>50 分钟-1h</b>；适合 G2 拥堵时切换。</p>
-      <div class="src">来源：上海市公安局出行攻略（同上）</div></div>
-    <div class="card"><h3>💰 单程费用</h3>
-      <p>过路费约 40-60 + 油费约 50-60 ≈ <b class="star">100-120 元/单程</b>（按 110km 估算）。</p></div>
-    <div class="card"><h3>⏰ 出发时段建议</h3>
-      <p><b>周六上午是出城高峰 → 尽量 07:00 前出发</b>或走 S26；返程避开 15:00-20:00 高峰（早出或 20:30 后）。</p></div>
-  </div>
-
-  <div class="tblwrap" style="margin-top:14px">
-  <table>
-    <tr><th>片区</th><th>停车场（泊位）</th><th>收费参考</th></tr>
-    <tr><td>拙政园/苏博</td><td>拙政园南（东北街178号·246）；城东（200）；百家巷园林（约100）</td><td>6元/小时；园林停车场1小时内6元、后每半小时3元</td></tr>
-    <tr><td>平江路</td><td>平江路南（120）；大儒巷（126）；平江实验学校（67）</td><td>约6元/小时档</td></tr>
-    <tr><td>山塘街/留园</td><td>山塘街北（305）；山塘街西（180）；金阊实验小学（140）</td><td>山塘街西：首小时4元、后1元/小时、日上限15元（UGC，现场核）</td></tr>
-  </table>
-  </div>
-  <p class="hint" style="margin-left:0">⚠️ 周末古城车位紧张（官方提醒）——<b>优先选带免费停车的酒店</b>，景点间打车比找车位省心；外围换乘场（东汇公园600泊等）节假日启用。</p>
-  <div class="src" style="margin-left:0">来源：<a href="https://www.suzhou.gov.cn/szsrmzf/mszx/202506/58fab42a1d504178a12040d6ed1338e4.shtml">苏州市政府停车攻略</a> · <a href="http://suzhou.bendibao.com/tour/201448/ly42216_3.shtm">本地宝费率</a></div>
+<section id="d0">
+  <h2>周五 18:30 · 抵达夜</h2>
+  <p class="lead">沪→苏约 1.5-2 小时；周五 17:00 下班出发 ≈ 18:30-19:00 到。先入住，再选今晚怎么过。</p>
+  <div class="dayhead"><h3>今晚的三个方向</h3><span class="daymeta">点选项切换 · 下方时间自动重排</span></div>
+  <div id="day-d0"></div>
+  <div class="dayfoot" id="foot-d0"></div>
 </section>
 
-<!-- ============ 景点菜单 ============ -->
-<section id="spots">
-  <h2>景点自选菜单</h2>
-  <p class="hint">按片区分组 · 每张卡片自带用时/票价/预约 · 两日行程从这里拼</p>
-
-  <h3 style="margin:14px 0 8px;color:var(--gold)">🏮 古城东北 · 拙政园片区</h3>
-  <div class="grid">
-    <div class="card"><h3>⭐ 拙政园 <span class="tag price">淡季70元</span></h3>
-      <p>苏州园林头牌，与苏博相邻。雨中烟雨感尤其出片（地面湿滑注意）。</p>
-      <div class="meta"><span class="tag">用时 1.5-2h</span><span class="tag">7:30-17:00（16:30停检）</span><span class="tag gold">需提前≥1天预约</span></div>
-      <div class="src">来源：<a href="https://ylj.suzhou.gov.cn/szsylj/mpjg/wztt.shtml">园林局票价</a> · <a href="http://ylj.suzhou.gov.cn/szsylj/kfsj/wztt.shtml">开放时间</a> · <a href="https://www.jfdaily.com/wx/detail.do?id=760418">上观：常约满</a></div></div>
-    <div class="card"><h3>🏛 苏州博物馆 <span class="tag price">免费</span></h3>
-      <p>贝聿铭封山之作，就在拙政园旁——<b>二选一或连着逛</b>。</p>
-      <div class="meta"><span class="tag">用时 1.5h</span><span class="tag gold">「苏博全预约」小程序提前7天放票</span></div></div>
-    <div class="card"><h3>🛶 平江路 <span class="tag price">免费</span></h3>
-      <p>水巷原住民生活线，猫的天空之城写明信片、琵琶语评弹、花神咖啡都在这。</p>
-      <div class="meta"><span class="tag">用时 1-2h（含午餐可更长）</span><span class="tag">全天开放·免预约</span></div></div>
-  </div>
-
-  <h3 style="margin:16px 0 8px;color:var(--gold)">🌿 古城西 & 西北 · 留园 / 虎丘 / 山塘</h3>
-  <div class="grid">
-    <div class="card"><h3>⭐ 留园 <span class="tag price">淡季45元</span></h3>
-      <p>四大名园之一，与拙政园风格互补；从观前街打车约 10 分钟。</p>
-      <div class="meta"><span class="tag">用时 1.5h</span><span class="tag">7:30-17:00（16:30停检）</span><span class="tag gold">可提前7日购票</span></div>
-      <div class="src">来源：园林局票价表 · <a href="http://m.suzhou.bendibao.com/tour/ly80115.shtm">本地宝购票/规则</a></div></div>
-    <div class="card"><h3>🗼 虎丘 <span class="tag price">淡季60元</span></h3>
-      <p>「到苏州不游虎丘，乃憾事」；云岩寺塔+剑池，登高望古城。</p>
-      <div class="meta"><span class="tag">用时 2h</span><span class="tag">7:30-17:30（17:00停检）</span><span class="tag gold">建议提前1天</span></div>
-      <div class="src">来源：园林局开放时间 · <a href="http://suzhou.bendibao.com/tour/2020820/ly80094.shtm">本地宝购票</a></div></div>
-    <div class="card"><h3>🏮 山塘街 <span class="tag price">免费</span></h3>
-      <p>白居易打卡的运河古街，<b>夜景 > 白天</b>；画舫游船另费约138元起（二手价，现场核）。</p>
-      <div class="meta"><span class="tag">用时 1.5-2h（含晚餐）</span><span class="tag">全天·免预约</span></div></div>
-  </div>
-
-  <h3 style="margin:16px 0 8px;color:var(--gold)">🌆 园区 · 金鸡湖片区（古城东 20-30min 车程）</h3>
-  <div class="grid">
-    <div class="card"><h3>🌊 金鸡湖 <span class="tag price">免费</span></h3>
-      <p>湖景城市天际线，含免费水上巴士；停车最宽松。</p>
-      <div class="meta"><span class="tag">用时 1-1.5h</span><span class="tag">全天·免预约</span></div>
-      <div class="src">来源：<a href="https://news.2500sz.com/doc/2025/08/16/1165669.shtml">名城苏州</a></div></div>
-    <div class="card"><h3>📚 诚品书店 <span class="tag price">免费</span></h3>
-      <p>华语文创地标，楼梯+书墙出片；逛+咖啡 1.5-2h 很合适。</p>
-      <div class="meta"><span class="tag">用时 1.5-2h</span><span class="tag gold">营业时间约10:00-22:00（未获官方确认，到场前电话核）</span></div></div>
-  </div>
-
-  <h3 style="margin:16px 0 8px;color:var(--gold)">🏘 古镇二选一（返沪方向彩蛋）</h3>
-  <div class="grid">
-    <div class="card"><h3>⭐ 周庄 <span class="tag price">8折=80元</span></h3>
-      <p>昆山、<b>返沪顺路</b>；全时段8折（含节假日）、一次玩3天，买原价票可办<b>实名终身免费入园</b>。景区 8:00-21:00。</p>
-      <div class="meta"><span class="tag">半天-1天</span><span class="tag gold">彩蛋：终身票</span></div>
-      <div class="src">来源：<a href="https://www.zhouzhuang.net/service_7.html">周庄官网</a></div></div>
-    <div class="card"><h3>同里 <span class="tag price">联票100元</span></h3>
-      <p>吴江、商业化更轻、更清净；联票含退思园，7:30前/17:00后进镇免大门票——<b>不顺路但人少</b>。</p>
-      <div class="meta"><span class="tag">半天-1天</span><span class="tag">购票：君到苏州</span></div>
-      <div class="src">来源：<a href="http://m.suzhou.bendibao.com/tour/ly66660.shtm">本地宝</a></div></div>
-  </div>
+<section id="d1">
+  <h2>周六 · 古城经典日</h2>
+  <p class="lead">主线是「早入园抢空镜」；想睡到自然醒就选带 ⏰ 的替换项，后面整条线会自动推后。</p>
+  <div class="sumbar" id="sum-d1"></div>
+  <div class="dayhead"><h3>时间轴</h3><span class="daymeta">绿框=当前选择</span></div>
+  <div id="day-d1"></div>
+  <div class="dayfoot" id="foot-d1"></div>
 </section>
 
-<!-- ============ 行程 ============ -->
-<section id="plan">
-  <h2>两日慢行程（弹性模板）</h2>
-  <p class="hint">周五下班出发、周末整天泡在苏州 ｜ 两日可互换 · 每段都留了缓冲 · 睡到自然醒也能跑通 · ⏰只是参考不是闹钟</p>
-
-  <div class="day">
-    <h3>Day 1 · 古城慢逛线</h3>
-    <div class="swap">主题：园林 + 水巷 + 夜山塘 ｜ 古城内全天打车/步行，不开车</div>
-    <div class="block"><span class="t">09:30</span><b>自然醒 · 出发</b><span>不赶早高峰；路上 1.5-2h，服务区休整一次</span><div class="opts">💡 周五晚已抵苏入住 → 跳过本段，直接从 11:15 开逛，上午还能睡到自然醒</div></div>
-    <div class="block"><span class="t">11:15</span><b>抵古城 · 二选一开逛</b>
-      <span>拙政园（已预约）或 苏博（已预约）</span>
-      <div class="opts">💡 都想去：先苏博（1.5h）再隔街拙政园，但会紧凑——建议只选一个，另一个留给下次</div></div>
-    <div class="block"><span class="t">13:00</span><b>平江路午餐 + 漫步</b>
-      <span>沿水巷走走停停，写字片、听评弹都算行程</span>
-      <div class="opts">餐厅三选一：囍老板（¥60）/ 桃花源记（排队王）/ 朱鸿兴面馆（¥30档）</div></div>
-    <div class="block"><span class="t">14:30</span><b>🧋 茶颜悦色 · 观前街店</b><span>步行可达；非饭点排队少；顺路回酒店放行李</span></div>
-    <div class="block"><span class="t">15:30</span><b>自由时段（三选一）</b>
-      <div class="opts">A 留园（¥45·提前购票）｜B 回酒店躺 1 小时 ｜C 平江路评弹馆听一场</div></div>
-    <div class="block"><span class="t">17:30</span><b>山塘街 · 夜景 + 晚餐</b>
-      <span>灯笼亮起后最好看</span>
-      <div class="opts">晚餐二选一：满桂芳（¥90·松鼠桂鱼）/ 随缘小馆；可加画舫游船（约138起）</div></div>
-    <div class="block"><span class="t">20:00</span><b>回酒店 · 看情况加一场</b><span>有力气去听平江路夜评弹，没力气直接躺——都对</span></div>
-  </div>
-
-  <div class="day">
-    <h3>Day 2 · 东扩返程线</h3>
-    <div class="swap">主题：虎丘 + 湖区 + 从容回家 ｜ 返程避开 15:00-20:00 高峰</div>
-    <div class="block"><span class="t">09:30</span><b>自然醒 · 酒店早餐</b><span>不退房可以寄存行李再出门</span></div>
-    <div class="block"><span class="t">10:30</span><b>虎丘（可跳过）</b>
-      <span>2h 登高收尾；不想爬山就直接跳到下一段</span>
-      <div class="opts">💡 跳过虎丘 → 多出 2h，给诚品/金鸡湖或周庄</div></div>
-    <div class="block"><span class="t">12:30</span><b>观前街午餐（正餐版）</b>
-      <div class="opts">老字号：松鹤楼（¥150·松鼠桂鱼）/ 得月楼（¥150·等位久）｜ 平价：山海焗（¥70）/ 同得兴面馆</div></div>
-    <div class="block"><span class="t">14:00</span><b>金鸡湖 + 诚品书店</b><span>湖边走走 + 书店泡 1.5h；停车宽松</span></div>
-    <div class="block"><span class="t">16:00 前</span><b>启程返沪</b>
-      <span>早出发避开 15:00-20:00 高峰；雨天再提前</span>
-      <div class="opts">💡 想加周庄：16:00 先去周庄（顺路昆山）玩到 18:30，19:30 后出发 = 错峰到家 21:30</div></div>
-    <div class="block"><span class="t">18:30</span><b>预计到家</b><span>雨天 + 路况顺延 30-60min 属正常，别催</span></div>
-  </div>
-
-  <h3 style="margin:14px 0 8px;color:var(--gold)">🎛 弹性开关（按心情改）</h3>
-  <div class="switch">
-    <div class="sw"><b>☔ 下雨备案</b>Day1 改「苏博 → 平江路室内午餐 → 评弹 → 酒店」；游船、虎丘取消，山塘夜景雨中撑伞也别有味道。</div>
-    <div class="sw"><b>😴 躺平版</b>每天只排 1 个主景点，其余睡饱 + 吃好 + 逛街；茶颜和山塘夜景保留，其余随缘。</div>
-    <div class="sw"><b>⏱ 只有一天</b>砍掉虎丘和园区：拙政园 → 平江路午餐 → 茶颜 → 留园 → 山塘夜景，当晚返沪。</div>
-    <div class="sw"><b>🏯 加古镇</b>Day2 换成「周庄一整天」（80元·顺路），返沪改 19:30 后出发错峰。</div>
-  </div>
+<section id="d2">
+  <h2>周日 · 虎丘 + 返程</h2>
+  <p class="lead">只安排一个大点，16:30 前后出发回沪，周日出城 16:00-18:00 是最堵的窗口，越早走越顺。</p>
+  <div class="sumbar" id="sum-d2"></div>
+  <div class="dayhead"><h3>时间轴</h3><span class="daymeta">点选项切换</span></div>
+  <div id="day-d2"></div>
+  <div class="dayfoot" id="foot-d2"></div>
 </section>
 
-<!-- ============ 茶颜悦色 ============ -->
-<section id="tea">
-  <h2>🧋 茶颜悦色 · 苏州门店</h2>
-  <p class="hint">2024-09-28 三店同开进驻苏州（南京、无锡后江苏第三城），后持续扩张</p>
-  <div class="grid">
-    <div class="card" style="border-color:#d9c9a8;background:#fffdf7"><h3><span class="star">★</span> 观前街店（游园会店型）<span class="tag gold">本次首选</span></h3>
-      <p>姑苏区观前街商圈，<b>离平江路步行可达</b>，正好嵌在 Day1 行程里。</p>
-      <div class="meta"><span class="tag">人均 15-20 元</span><span class="tag">周末常排队 → 非饭点去</span></div></div>
-    <div class="card"><h3>仁恒仓街店（茶叶子店型）</h3><p>茶叶 + 文创周边专卖，顺路可逛。</p></div>
-    <div class="card"><h3>星悦汇店（工业园区）</h3><p>在园区方向——Day2 逛金鸡湖时顺路补一杯。</p></div>
-    <div class="card"><h3>🥤 情侣点单建议</h3>
-      <p><b>幽兰拿铁 + 声声乌龙</b> 各一杯，配苏州城市限定周边（冰箱贴/明信片）。</p>
-      <div class="src">来源：<a href="https://m.winshang.com/news727955.html">赢商网</a> · <a href="http://finance.people.com.cn/n1/2024/1011/c1004-40337041.html">人民网</a>；⚠️ 当日营业/排队出发前大众点评核</div></div>
-  </div>
-</section>
-
-<!-- ============ 吃什么 ============ -->
 <section id="food">
-  <h2>吃什么 · 自选清单</h2>
-  <p class="hint">正餐 / 面点小吃 / 打卡小馆 三组 · 人均为参考价</p>
-
-  <h3 style="margin:14px 0 8px;color:var(--gold)">🍶 正餐（苏帮菜老字号 & 本地馆）</h3>
+  <h2>吃什么 · 快速对照</h2>
+  <p class="lead">具体哪家已在行程里可选，这里只做口味速查：</p>
   <div class="grid">
-    <div class="card"><h3>松鹤楼（观前店）<span class="tag price">人均¥150</span></h3><p>乾隆创始（1757），太监弄72号；<b>松鼠桂鱼</b>、蟹粉豆腐。宴请排面之选。</p></div>
-    <div class="card"><h3>得月楼（观前店）<span class="tag price">人均¥150</span></h3><p>400年老字号、太监弄43号；清炒虾仁、蟹粉芙蓉盅。<b>周末等位久，早去或拿号后逛</b>。</p></div>
-    <div class="card"><h3>山海焗苏帮菜 <span class="tag price">人均¥70</span></h3><p>观前旁丁家巷，本地人常去；砂锅苏州菜、太湖大虾。<b>性价比之选</b>。</p></div>
-    <div class="card"><h3>囍老板苏州菜 <span class="tag price">人均¥60</span></h3><p>临顿路站5号口（平江路边）；土灶家常菜，蟹黄虾仁粉丝煲——Day1 午餐顺路。</p></div>
+    <div class="card"><h3>正餐·苏帮菜</h3><p style="font-size:13.3px"><b>松鹤楼</b>（观前，松鼠鳜鱼·老字号·人均¥120+，周末排）｜<b>得月楼</b>（同档次，本地人也认）｜<b>山海焗</b>（创意苏帮·锅气足）｜<b>囍老板</b>（偏辣对胃口·网红）</p></div>
+    <div class="card"><h3>面点·小吃</h3><p style="font-size:13.3px"><b>朱鸿兴</b>（爆鱼面·焖肉面·¥20-30）｜<b>同得兴</b>（枫镇大肉面·夏天限定款）｜<b>哑巴生煎</b>（临顿路·¥15）｜糖粥/鸡头米/酒酿圆子随缘吃</p></div>
+    <div class="card"><h3>茶饮·打卡</h3><p style="font-size:13.3px"><b>茶颜悦色已开进苏州</b>：观前街店（首选·离主线近）、仁恒仓街、星悦汇。经典款幽兰拿铁/声声乌龙，周末下午排队 20-40 分钟，早上或工作日段去快。</p></div>
   </div>
-
-  <h3 style="margin:16px 0 8px;color:var(--gold)">🍜 面馆 & 小吃</h3>
-  <div class="grid">
-    <div class="card"><h3>朱鸿兴 <span class="tag price">¥20-30</span></h3><p>1938年老字号（观前）；虾仁大排面、焖蹄浇头。</p></div>
-    <div class="card"><h3>同得兴（嘉馀坊店）<span class="tag price">¥25-40</span></h3><p>焖肉、爆鱼红汤面；比松鹤楼面馆便宜 2-3 成，近观前街。</p></div>
-    <div class="card"><h3>哑巴生煎 <span class="tag price">¥15-25</span></h3><p>临顿路温家岸12号，<b>米其林指南收录</b>；鲜肉生煎汤汁足微甜，<b>饭点必排队</b>。</p>
-      <div class="src">来源：<a href="https://guide.michelin.com/sg/zh_CN/jiang-su/suzhou_1031079/restaurant/ya-ba-sheng-jian-wenjia-an">米其林指南</a></div></div>
-    <div class="card"><h3>桃花源记 <span class="tag price">¥30-50</span></h3><p>平江路「排队王」；赤豆糊小圆子、桃源熟醉蟹、八仙鸡汤馄饨12元。</p>
-      <div class="src">来源：<a href="https://www.jfdaily.com/wx/detail.do?id=744464">上观新闻</a></div></div>
-  </div>
-
-  <h3 style="margin:16px 0 8px;color:var(--gold)">☕ 情侣打卡小馆</h3>
-  <div class="grid">
-    <div class="card"><h3>猫的天空之城（平江路）</h3><p>写明信片寄给未来 + 咖啡，夜景窗台出片。</p></div>
-    <div class="card"><h3>花神咖啡（平江路）</h3><p>欧风建筑，拿铁 + 甜点，环境清幽。</p></div>
-    <div class="card"><h3>琵琶语评弹馆（平江路）</h3><p>临河点茶听《声声慢》，江南氛围感拉满——Day1 自由时段或夜场。</p></div>
-    <div class="card"><h3>满桂芳（山塘街）<span class="tag price">人均¥90</span></h3><p>现做松鼠桂鱼，夜游山塘后的正餐备选。</p></div>
-  </div>
-  <div class="src" style="margin-left:0">美食来源汇总：<a href="https://post.smzdm.com/p/axkg2w83">什么值得买（点评汇总）</a> · <a href="https://you.ctrip.com/food/11/4925257.html">携程·朱鸿兴</a> · <a href="https://heidihihi.com/苏州三大街區攻略">平江路攻略</a> · TripAdvisor</div>
 </section>
 
-<!-- ============ 住哪里 ============ -->
 <section id="stay">
   <h2>住哪里 · 四区对比</h2>
-  <p class="hint">开车优先「免费停车」；价位为参考区间，预订前以 App 实价为准</p>
-
-  <div class="tblwrap">
-  <table>
-    <tr><th>区域</th><th>适合谁</th><th>优缺点</th></tr>
-    <tr><td><b>观前街</b> ⭐推</td><td>第一次来 / 吃货 / 行程居中</td><td>餐饮最密、步行10min到平江路、到留园打车10min；热闹偏商业化</td></tr>
-    <tr><td><b>平江路</b></td><td>拍照党 / 水巷氛围</td><td>夜游最出片、近拙政园；⚠️停车紧张</td></tr>
-    <tr><td><b>山塘街</b></td><td>运河夜景控 / 近火车站</td><td>夜景好；游客较多</td></tr>
-    <tr><td><b>金鸡湖</b></td><td>湖景酒店控 / Day2 顺路</td><td>停车最宽松、硬件新；⚠️离古城20-30min车程</td></tr>
-  </table>
-  </div>
-
-  <div class="grid" style="margin-top:14px">
-    <div class="card"><h3>⭐ 全季观前步行街店 <span class="tag price">¥550-650</span></h3><p><b>免费停车</b>，Agoda 8.8；居中性价比首选。</p></div>
-    <div class="card"><h3>观前街平江路漫心酒店 <span class="tag price">¥500-700</span></h3><p>携程 4.7/2177条，近乐桥地铁站。</p></div>
-    <div class="card"><h3>拙政园漫心府 <span class="tag price">¥800-1200</span></h3><p>Trip 9.5/1169条，园林建筑、<b>免费停车</b>——想住好点选它，就在 Day1 行程旁。</p></div>
-    <div class="card"><h3>花间堂·探花府 <span class="tag price">¥700-1000</span></h3><p>潘氏老宅改建，设计感民宿。</p></div>
-    <div class="card"><h3>石路山塘街美居 <span class="tag price">¥450-650</span></h3><p>携程5761条「超棒」；近山塘夜景。</p></div>
-    <div class="card"><h3>囍住美院 <span class="tag price">¥400-500</span></h3><p>预算档，山塘街片区。</p></div>
-    <div class="card"><h3>金鸡湖英迪格 <span class="tag price">¥900-1300</span></h3><p>有停车场，园区湖景档。</p></div>
-    <div class="card"><h3>金鸡湖万豪 <span class="tag price">约¥710起</span></h3><p>Booking 8.6，稳妥大牌之选。</p></div>
-  </div>
-  <p class="hint" style="margin-left:0">⚠️ 房价为搜索快照折算的参考区间（OTA 实时比价受限），<b>预订前请以携程/美团实价为准</b>。</p>
-</section>
-
-<!-- ============ 预算与清单 ============ -->
-<section id="budget">
-  <h2>预算 & 出发前清单</h2>
   <div class="grid">
-    <div class="card"><h3>💰 两人预算（参考）</h3>
-      <div class="tblwrap"><table>
-        <tr><th>项</th><th>金额</th></tr>
-        <tr><td>交通（过路+油·往返）</td><td>¥200-240</td></tr>
-        <tr><td>停车（两天）</td><td>¥60-100（酒店免费则更低）</td></tr>
-        <tr><td>门票（拙政70×2+留园45×2+虎丘60×2）</td><td><b>¥350</b>（学生证半价另省；游船+276可选）</td></tr>
-        <tr><td>餐饮（含茶颜）</td><td>¥500-600</td></tr>
-        <tr><td>住宿</td><td>¥550-1200</td></tr>
-        <tr><td><b>合计</b></td><td><b class="star">约 ¥1,650-2,350</b></td></tr>
-      </table></div></div>
-    <div class="card"><h3>✅ 出发前清单</h3>
-      <ul class="clean check">
-        <li>拙政园预约（提前≥1天，每单1张）</li>
-        <li>苏博预约（想去就提前7天放票时抢）</li>
-        <li>留园 / 虎丘 购票（可提前7日）</li>
-        <li>订酒店（免费停车优先）</li>
-        <li>查苏州天气 + 苏州交警周末提醒</li>
-        <li>大众点评核对茶颜门店营业/排队</li>
-        <li>诚品书店电话确认营业时间</li>
-        <li>带伞、薄外套、防滑鞋、身份证</li>
-      </ul></div>
+    <div class="card"><h3>观前街 <span class="tag rec">推荐</span></h3><p style="font-size:13.3px">四区几何中心，步行可达平江路/苏博圈，外卖吃饭最方便。参考¥300-600。</p></div>
+    <div class="card"><h3>平江路 <span class="tag hot">氛围</span></h3><p style="font-size:13.3px">民宿集中、推窗即河巷，走两步到苏博/拙政园。参考¥250-600。</p></div>
+    <div class="card"><h3>山塘/石路</h3><p style="font-size:13.3px">近西边景点+苏州站，适合 Day2 直接从西边出发。参考¥300-550。</p></div>
+    <div class="card"><h3>金鸡湖东/西</h3><p style="font-size:13.3px">新城市夜景，但离古城 20 分钟车程。参考¥450-900。</p></div>
   </div>
 </section>
 
-<!-- ============ 注意事项 ============ -->
-<section id="tips">
-  <h2>注意事项</h2>
-  <ul class="clean">
-    <li><b>爽约红线</b>：实名票按约到场，退票赶在游览日前一日 24:00 前——一周爽约2次会被禁约30天</li>
-    <li><b>古城单行</b>：潘儒巷禁行、白塔西路东→西单行、西北街西→东单行——跟着导航，拙政园周边预留20分钟找位</li>
-    <li><b>开车原则</b>：古城内景点间打车/步行为主，酒店免费停车 + 景点停车场组合最省心</li>
-    <li><b>返程错峰</b>：15:00-20:00 是返沪高峰，16:00 前上高速或 20:30 后出发；雨天夜行再提前</li>
-    <li><b>周末活动</b>：演唱会/展会场馆周边 18:30-21:30 易堵，出发前看苏州交警发布</li>
-    <li><b>雨天照玩</b>：园林雨景是加分项，石阶湿滑慢走；游船、虎丘可临场取消，室内备案见「弹性开关」</li>
-    <li><b>价格核对</b>：本文票价/时间为 11 月淡季参考 + 二手来源处已标注，出发前以官方渠道为准</li>
+<section id="rain">
+  <h2>雨天备案</h2>
+  <ul class="tight">
+    <li><b>中雨方案：</b>苏博（室内+有座）→ 平江路沿廊棚走 → 平江路评弹馆听一场 → 观前街室内逛；拙政园雨景其实出片（人更少），带伞即可，<b>虎丘山路湿滑可整个换掉</b>。</li>
+    <li><b>室内替代：</b>诚品书店（10:00-22:00，可耗半天）→ 苏博（全预约制，雨天最稳）→ 平江路评弹 → 双塔市集（室内有空调）→ 观前街商场。</li>
+    <li><b>原则：</b>园林雨天照去（意境加分、人少），虎丘/古镇/金鸡湖优先往后换。</li>
   </ul>
 </section>
 
-<!-- ============ 来源 ============ -->
-<section id="sources">
+<section id="src">
   <h2>信息来源</h2>
-  <p class="hint">点开逐条核对 · 官方源优先 · 二手/UGC 已标注</p>
-  <details><summary>🏛 官方（政策/票价/时间/停车）</summary><ul>
-    <li>苏州市政府 · 古城外地车限行取消通告：https://www.suzhou.gov.cn/szsrmzf/mszx/202512/317404a496ef4f8d8a98fbf7d17e0ac0.shtml</li>
-    <li>苏州市政府 · 景点停车攻略：https://www.suzhou.gov.cn/szsrmzf/mszx/202506/58fab42a1d504178a12040d6ed1338e4.shtml</li>
-    <li>苏州市园林局 · 票价表：https://ylj.suzhou.gov.cn/szsylj/mpjg/wztt.shtml ｜ 开放时间：http://ylj.suzhou.gov.cn/szsylj/kfsj/wztt.shtml</li>
-    <li>周庄官网票务：https://www.zhouzhuang.net/service_7.html</li>
-    <li>米其林指南 · 哑巴生煎：https://guide.michelin.com/sg/zh_CN/jiang-su/suzhou_1031079/restaurant/ya-ba-sheng-jian-wenjia-an</li>
-    <li>上海市公安局 · 出行攻略：https://gaj.sh.gov.cn/shga/wzXxfbGj/detail?pa=110ef360e4374a417b3cc1e225a8ffabe36a90809a385fdef3ab48511424362d</li>
-  </ul></details>
-  <details><summary>📰 官方媒体 / 行业媒体</summary><ul>
-    <li>人民网 · 茶颜悦色苏州三店同开：http://finance.people.com.cn/n1/2024/1011/c1004-40337041.html</li>
-    <li>赢商网 · 茶颜悦色门店扩张：https://m.winshang.com/news727955.html</li>
-    <li>名城苏州 · 景区预约政策 / 金鸡湖：https://news.2500sz.com/doc/2025/04/29/1148315.shtml ｜ https://news.2500sz.com/doc/2025/08/16/1165669.shtml</li>
-    <li>上观新闻 · 拙政园约满：https://www.jfdaily.com/wx/detail.do?id=760418 ｜ 桃花源记：https://www.jfdaily.com/wx/detail.do?id=744464</li>
-    <li>上海发布/人民网 · 沪苏路线耗时：http://sh.people.com.cn/n2/2023/0308/c176737-40329283.html</li>
-    <li>苏州本地宝 · 购票/爽约/停车费率：http://m.suzhou.bendibao.com/tour/ly80115.shtm ｜ http://suzhou.bendibao.com/tour/201448/ly42216_3.shtm</li>
-    <li>天气：https://tianqi.so.com/weather/101190401 ｜ https://m.weather.com.cn/mweather15d/101190401.shtml（出发前复查）</li>
-  </ul></details>
-  <details><summary>🧭 二手 / UGC（已标注，现场复核）</summary><ul>
-    <li>什么值得买 · 苏帮菜点评汇总：https://post.smzdm.com/p/axkg2w83</li>
-    <li>携程 · 朱鸿兴：https://you.ctrip.com/food/11/4925257.html</li>
-    <li>TripAdvisor · 哑巴生煎：https://cn.tripadvisor.com/Restaurant_Review-g297442-d3786853-Reviews-YaBa_ShengJian-Suzhou_Jiangsu.html</li>
-    <li>平江路攻略：https://heidihihi.com/苏州三大街區攻略 ｜ 山塘停车/游船（去哪儿UGC）：https://travelnews.qunar.com/ugc/suzhou-selfdrive-shantang-flowers</li>
-    <li>房价：Agoda/携程/Booking 搜索快照折算，未实时比价——以 App 实价为准</li>
-    <li>同里取舍参考：GoChinaTravel（二手）</li>
-  </ul></details>
+  <div class="srcs">
+    <p>🎫 价格/预约：<a href="https://ylj.suzhou.gov.cn/szsylj/mpjg/wztt.shtml" target="_blank">苏州园林局票价表</a><a href="https://www.suzhou.gov.cn/szsrmzf/mszx/202512/317404a496ef4f8d8a98fbf7d17e0ac0.shtml" target="_blank">古城限行取消通告</a></p>
+    <p>🗺 路线/耗时：<a href="http://suzhou.bendibao.com/tour/2023728/115820.shtm" target="_blank">本地宝两日游</a><a href="https://travelnews.qunar.com/ugc/suzhou-3day2night-classic-tour" target="_blank">去哪儿经典线</a><a href="https://m.ly.com/trip/detail/5922505" target="_blank">同程深度两日</a><a href="https://zhuanlan.zhihu.com/p/64608319" target="_blank">知乎实测两日</a></p>
+    <p>⏰ 错峰/人流：<a href="https://m.ly.com/trip/detail/5922505" target="_blank">拙政园8点前空镜</a><a href="https://zhuanlan.zhihu.com/p/385715289" target="_blank">拙政园错峰</a><a href="https://travelnews.qunar.com/ugc/suzhou-huqiu-4-hour-hiking-route" target="_blank">虎丘深度</a><a href="https://zhuanlan.zhihu.com/p/111371331" target="_blank">金鸡湖喷泉</a><a href="https://jinjilake.sipac.gov.cn/zuixinzixun_article-342-4296.html" target="_blank">喷泉官方</a></p>
+    <p>🚗 停车/交通：<a href="https://news.2500sz.com/doc/2025/05/01/1148637.shtml" target="_blank">苏州旅游公交专线</a><a href="https://m.ly.com/trip/detail/5922505" target="_blank">P+R换乘</a><a href="http://wenda.bendibao.com/tour/2019924/71203.shtm" target="_blank">苏博→留园车程</a></p>
+    <p>🍜 住宿/美食：<a href="https://www.suzhou.gov.cn/szsrmzf/mszx/202506/58fab42a1d504178a12040d6ed1338e4.shtml" target="_blank">苏州停车攻略</a><a href="https://www.meituan.com/meishi/1247549/" target="_blank">哑巴生煎</a><a href="https://zhuanlan.zhihu.com/p/145193994" target="_blank">茶颜悦色</a></p>
+    <p style="margin-top:8px">⚠ 数据基于 2026-11 多源攻略整理，预约政策/价格/营业时间可能调整，出发前以官方为准。</p>
+  </div>
 </section>
 
-<footer>
-  📮 本手册基于 2026-11-13 完成的多源联网调研整理 · 票价按 11 月淡季 · 出发前请复查天气/预约/营业时间<br>
-  祝两个人玩得慢一点、开心一点 🪷
-</footer>
-
 </div>
+<footer>苏州慢游 · 交互行程手册<br>点选任意替换项，时间轴与预算自动重排 · 「恢复推荐线」可一键还原</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const DAYS=[
+ {id:"d0",anchor:18*60+30,slots:[
+  {id:"d0a",label:"抵达 · 入住放行李",fixed:{name:"古城入住 + 停车",ic:"🏨",dur:40,cost:0,transit:{mode:"drive",mins:0,txt:"高速→酒店"},detail:"建议住观前街或平江路一带：车停酒店，两天核心行程全程步行圈。",pros:["停车后不用再开车","吃饭逛街下楼就到"],cons:["古城内房价周末上浮"],res:""}},
+  {id:"d0b",label:"今晚怎么过",options:[
+    {id:"zk",name:"观前街夜宵",ic:"🍡",dur:110,cost:140,transit:{mode:"walk",mins:10,txt:"酒店→观前街"},detail:"哑巴生煎+鸡头米+糖粥扫街，顺路看玄妙观夜景。",pros:["最顺路、吃完走回酒店","小吃多、开到很晚"],cons:["商业街属性、氛围一般"],res:""},
+    {id:"st",name:"山塘街夜游船",ic:"🏮",dur:140,cost:180,transit:{mode:"drive",mins:15,txt:"酒店→山塘街"},detail:"华灯初上后进街，夜游船约30分钟+评弹一场约15分钟；20:00后人流回落。",pros:["周五晚氛围最佳","夜游船+评弹一次集齐"],cons:["游船要排队、末班较早","需打车往返"],res:"游船票现场买，末班时间以现场为准"},
+    {id:"ph",name:"金鸡湖音乐喷泉",ic:"⛲",dur:80,cost:0,transit:{mode:"metro",mins:25,txt:"地铁1号线/打车20分"},detail:"每周五、六 20:00-20:30 一场（免费），东方之门灯光秀同步亮灯——周五专属彩蛋。",pros:["免费+周五限定","现代苏州另一面"],cons:["东边往返50分钟","看完回古城较晚"],res:"喷泉遇大风/检修会停，出发前查「金鸡湖」官微"},
+    {id:"wgy",name:"网师园夜花园",ic:"🎭",dur:150,cost:0,transit:{mode:"walk",mins:18,txt:"酒店→网师园"},detail:"昆曲/评弹/古琴/江南丝竹非遗实景演出，曾获 UNESCO 推荐；周五、周六演到 22:50。⚠ 本季演出 11 月 16 日落幕——这周末正是最后档期。",pros:["非遗实景、氛围独一份","周五周六专场到深夜"],cons:["夜票另购、需提前预约","档期紧、临近落幕"],res:"夜票价未公开，公众号「苏州园林旅游」查价预约；白天票旺季¥40"},{id:"zz",name:"早点睡",ic:"😴",dur:50,cost:0,transit:{mode:"walk",mins:0,txt:"就在酒店"},detail:"明天主线 7:45 出发，养精蓄锐版。",pros:["状态最好","抢8点前空镜"],cons:["今晚啥也没看"],res:""}
+  ]}
+ ]},
+ {id:"d1",anchor:7*60+45,slots:[
+  {id:"d1a",label:"早餐",options:[
+    {id:"zq",name:"园外快速早餐",ic:"🍜",dur:25,cost:30,transit:{mode:"walk",mins:15,txt:"酒店→拙政园"},detail:"朱鸿兴/哑巴生煎 7 点开门，顺路吃完进园，不耽误 8 点前入园。",pros:["不耽误主线","¥30 搏一顿地道"],cons:["要控制时间"],res:""},
+    {id:"jd",name:"酒店早餐（自然醒）⏰",ic:"🥚",dur:90,cost:0,transit:{mode:"walk",mins:15,txt:"酒店→拙政园"},detail:"选这项 = 懒人线：整条线自动推后约1小时，拙政园改 9:30 后入园（人多）——时间轴已为你顺延。",pros:["睡饱","不用赶"],cons:["错过空镜、团客高峰","后面山塘夜景会更紧凑"],res:""},
+    {id:"ds",name:"带在路上",ic:"🥪",dur:10,cost:15,transit:{mode:"walk",mins:15,txt:"酒店→拙政园"},detail:"便利店面包+牛奶，极限赶时间版。",pros:["最省时"],cons:["体验最差"],res:""}
+  ]},
+  {id:"d1b",label:"上午主线 · 园林",options:[
+    {id:"zzz",name:"拙政园 · 8点前空镜",ic:"🏛",tag:"推荐",dur:150,cost:70,transit:{mode:"walk",mins:5,txt:"园外→检票口"},detail:"7:30 开园，8:00 前入园几乎没人，远香堂前可拍空镜；9:00 后旅行团激增，拍完即撤。中国四大名园之首，2-2.5 小时刚好。",pros:["人最少的黄金一小时","园林路一带适合拍汉服"],cons:["必须早起","9点后体验急剧下降"],res:"🎫 必须提前≥1天实名分时预约（选早场）"},
+    {id:"zzr",name:"拙政园 · 自然醒9:30进",ic:"🏛",dur:120,cost:70,transit:{mode:"walk",mins:5,txt:"园外→检票口"},detail:"配合懒人早餐线，接受人流的版本。",pros:["轻松","核心景致仍在"],cons:["团客高峰、拍照全是人","体验约打对折"],res:"🎫 同样需提前预约"},
+    {id:"lz",name:"留园 · 上午替代",ic:"🌿",dur:120,cost:45,transit:{mode:"drive",mins:19,txt:"打车19分钟"},detail:"游客比拙政园少约30%，冠云峰、建筑布局精致，上午相对宽松。",pros:["人少30%","门票省¥25"],cons:["气势小于拙政园","跨区车程"],res:"可现场买票，周末也少排"},
+    {id:"yp",name:"艺圃 · 小众清静",ic:"🍃",dur:80,cost:10,transit:{mode:"walk",mins:12,txt:"步行经潘儒巷"},detail:"仅¥10 的世界文化遗产园林，人极少；延光阁是苏州最大水榭茶室（¥30/套含茶点），7:45 前可抢窗边位。",pros:["几乎没人、¥10","原汁原味苏州生活感"],cons:["小，1小时逛完","巷子窄导航难（潘儒巷禁车，步行进）"],"res":"无需预约·门口扫码/自助机购票即入（17:00 停止入园）"},
+    {id:"oy",name:"耦园 · 菊展限时",ic:"🌼",dur:85,cost:20,transit:{mode:"drive",mins:14,txt:"打车14分钟"},detail:"淡季¥20 的世界文化遗产园林，「佳偶成双」爱情主题；11月7日-28日正办「千菊寻幽」菊展，这周末去正在展期。",pros:["菊展限时加映","人少清静、情侣氛围"],cons:["园子小、逛不久","入口可能限流（南进北出）"],res:"现场可购票"},{id:"szl",name:"狮子林 · 假山迷宫",ic:"🧗",dur:90,cost:40,transit:{mode:"walk",mins:6,txt:"步行6分钟"},detail:"与拙政园一街之隔（200米），假山迷宫是小孩和拍照爱好者最爱。",pros:["离拙政园超近可连游","假山趣味独特"],cons:["周末人挤人","与园林主线重复度高"],res:"可现场买票"}
+  ]},
+  {id:"d1c",label:"中午前 · 苏博",options:[
+    {id:"sb",name:"苏州博物馆本馆",ic:"🏛",tag:"推荐",dur:115,cost:0,transit:{mode:"walk",mins:6,txt:"拙政园→苏博 500米"},detail:"贝聿铭封山之作，片石假山+光影几何；室内有座可歇脚。逛完从出口步行约1公里到平江路。",pros:["免费","建筑本身就是展品","雨天/热天的室内避风港"],cons:["必须预约","包寄存规则严格","周末票紧张"],res:"🎫 公众号提前7天预约 · 周一闭馆"},
+    {id:"pt",name:"跳过苏博 · 平江路早逛",ic:"🛶",dur:140,cost:40,transit:{mode:"walk",mins:10,txt:"拙政园→平江路"},detail:"把苏博留给可能的雨天/补卡，上午直接扎进平江路支巷+双塔市集方向。",pros:["完全避开预约焦虑","市集烟火气、早点丰富"],cons:["错过本馆精华","双塔离主线稍绕"],res:""},
+    {id:"sl",name:"狮子林补卡（若上午没去）",ic:"🧗",dur:85,cost:40,transit:{mode:"walk",mins:6,txt:"步行6分钟"},detail:"上午在留园/艺圃的人，回古城顺路补上假山迷宫。",pros:["顺路","趣味性强"],cons:["周末人多"],res:""}
+  ]},
+  {id:"d1d",label:"午餐",options:[
+    {id:"shl",name:"松鹤楼 · 观前街",ic:"🐟",tag:"推荐",dur:75,cost:260,transit:{mode:"walk",mins:15,txt:"平江路→观前街"},detail:"松鼠鳜鱼是招牌，创于嘉庆年间的老字号，观前街本店氛围到位。",pros:["招牌菜一次到位","百年老字号"],cons:["贵、周末排30-60分钟","游客化"],res:"周末建议11:15 前到或错峰"},
+    {id:"dyl",name:"得月楼",ic:"🦐",dur:75,cost:230,transit:{mode:"walk",mins:17,txt:"步行1.2公里"},detail:"与松鹤楼齐名的老字号，本地人也认的一家。",pros:["口味稳定","同档次备选"],cons:["也要排队","价格相近"],res:""},
+    {id:"zhx",name:"朱鸿兴 · 头汤面",ic:"🍜",dur:40,cost:70,transit:{mode:"walk",mins:10,txt:"步行10分钟"},detail:"爆鱼面/焖肉面/阳春面，¥20-30 搏一顿地道苏式面，快而稳。",pros:["快、便宜、不怎么排","地道本地日常"],cons:["环境一般","吃不到硬菜"],res:""},
+    {id:"shj",name:"山海焗 · 创意苏帮",ic:"🥘",dur:75,cost:230,transit:{mode:"drive",mins:10,txt:"打车10分钟"},detail:"年轻人口味的创意苏帮菜，锅气足、下饭。",pros:["口味新、对年轻人胃口","分量足"],cons:["非传统、需打车","饭点要排"],res:"大众点评取号"},
+    {id:"xlg",name:"囍老板 · 重口味",ic:"🌶",dur:70,cost:250,transit:{mode:"drive",mins:12,txt:"打车12分钟"},detail:"偏辣的网红苏帮，给口味重的备一档。",pros:["辣得过瘾、本地网红"],cons:["排队、稍远"],res:""}
+  ]},
+  {id:"d1e",label:"下午 · 慢逛",options:[
+    {id:"pj",name:"平江路慢逛 + 评弹",ic:"🎶",tag:"推荐",dur:145,cost:70,transit:{mode:"walk",mins:5,txt:"回平江路"},detail:"沿河支巷随便走，19:00 后人明显变少；琵琶语等评弹馆听一场（约¥50/人含茶位）。",pros:["傍晚光线最好、人渐少","评弹+茶位坐着歇脚","汉服拍照出片"],cons:["15:00-16:00 是全天高峰段","商业化段店铺雷同"],res:"评弹现场买票，周末晚场先到先得"},
+    {id:"ly2",name:"留园（若上午没去）",ic:"🌿",dur:115,cost:45,transit:{mode:"drive",mins:19,txt:"打车19分钟"},detail:"下午的留园人流中等，冠云峰、曲廊四季皆宜。",pros:["错峰得当、人少","门票¥45"],cons:["跨区往返约40分钟","与上午园林可能重复"],res:""},
+    {id:"xt",name:"西园寺 + 双塔市集",ic:"🛕",dur:140,cost:25,transit:{mode:"drive",mins:15,txt:"打车15分钟"},detail:"西园寺¥5含3支香、观音面¥15、近百只猫+湖心亭抄经（17:00关门）；双塔市集免费、室内有空调。距留园步行10分钟可连游。",pros:["清静+烟火一次体验","花费低"],cons:["离主线远、车程多","两处都只能浅逛"],res:"西园寺门票以现场为准"},
+    {id:"cp",name:"诚品书店 + 金鸡湖",ic:"📚",dur:170,cost:100,transit:{mode:"metro",mins:25,txt:"地铁1号线25分钟"},detail:"诚品 10:00-22:00，书+文创+晚餐一条龙；18:00 前后湖边看日落。",pros:["室内不怕天气","能泡一整个下午"],cons:["跨区往返1小时","购物容易超支"],res:""}
+  ]},
+  {id:"d1f",label:"晚上",options:[
+    {id:"stn",name:"山塘街夜景 + 游船",ic:"🏮",tag:"推荐",dur:150,cost:160,transit:{mode:"drive",mins:15,txt:"打车15分钟"},detail:"17:00 前后进街最好：华灯初上→夜游船30分钟→评弹15分钟；20:00 后人流回落，沿河走到广济桥。",pros:["两天里氛围感最强的一晚","游船+评弹+夜景三合一"],cons:["游船排队长","末班较早、别太晚到"],res:"游船现场买，末班以现场为准"},
+    {id:"jsh",name:"金鸡湖日落 + 东方之门",ic:"🌇",dur:110,cost:120,transit:{mode:"metro",mins:25,txt:"地铁1号线"},detail:"Day0 没去东边的话，周六傍晚补上：18:00 前后日落+灯光秀。",pros:["日落机位绝","现代感夜景"],cons:["往返1小时","回古城较晚"],res:""},
+    {id:"gq",name:"观前街夜宵收尾",ic:"🍡",dur:90,cost:120,transit:{mode:"walk",mins:10,txt:"打车回古城→步行"},detail:"夜宵+顺路买手信（采芝斋、黄天源）。",pros:["近、便宜","手信可以提前买"],cons:["氛围普通"],res:""},
+    {id:"tr",name:"回酒店躺",ic:"😴",dur:60,cost:0,transit:{mode:"walk",mins:10,txt:"打车回酒店"},detail:"保存体力，明天还有一整个白天。",pros:["最放松"],cons:["夜景作废"],res:""}
+  ]}
+ ]},
+ {id:"d2",anchor:8*60+30,slots:[
+  {id:"d2a",label:"早餐",options:[
+    {id:"dtx",name:"同得兴 · 枫镇大肉面",ic:"🍜",dur:45,cost:75,transit:{mode:"walk",mins:8,txt:"酒店→观前街"},detail:"苏州面的另一块招牌，汤清味鲜。",pros:["地道、不贵"],cons:["观前店周末要排"],res:""},
+    {id:"hbg",name:"酒店早餐（自然醒）⏰",ic:"🥚",dur:65,cost:0,transit:{mode:"walk",mins:8,txt:"酒店→出发点"},detail:"周日线整体顺延，虎丘改 9:30 后进（团客渐多）。",pros:["睡饱"],cons:["虎丘人变多、返程相应推后"],res:""},
+    {id:"jz",name:"哑巴生煎 · 再来一笼",ic:"🥟",dur:35,cost:45,transit:{mode:"walk",mins:8,txt:"步行8分钟"},detail:"临顿路总店，¥15 一客，配豆浆。",pros:["快、香、便宜"],cons:["就这一个味"],res:""}
+  ]},
+  {id:"d2b",label:"上午主线",options:[
+    {id:"hq",name:"虎丘 · 吴中第一名胜",ic:"🗼",tag:"推荐",dur:145,cost:60,transit:{mode:"bus",mins:25,txt:"游1路/打车20-25分"},detail:"云岩寺塔（东方比萨斜塔）+ 剑池 + 试剑石，登塔现场限流预约；免费讲解器整点发放先抢一台。游1路门口直达，回程顺路广济桥站。",pros:["两天里分量最重的景","登塔+讲史一次集齐"],cons:["跨区车程25分钟","有坡道、费腿"],res:"🎫 登塔现场限流预约 · 讲解器 8:00-16:00 整点发放"},
+    {id:"ly3",name:"留园（若还没去）",ic:"🌿",dur:120,cost:45,transit:{mode:"drive",mins:19,txt:"打车19分钟"},detail:"把园林的另一半补在周日上午，人比周末下午少。",pros:["人少、精致","离古城近"],cons:["与主线园林重复感"],res:"可现场买票"},
+    {id:"zzb",name:"拙政园补卡（若还没去）",ic:"🏛",dur:145,cost:70,transit:{mode:"drive",mins:12,txt:"打车12分钟"},detail:"周六没进成的，周日早场补上——但周日 9 点后人更多，越早越好。",pros:["不留遗憾","早场仍可抢空镜"],cons:["占用整个上午","需已有预约"],res:"🎫 需预约"},
+    {id:"gz",name:"周庄/同里古镇 · 特种兵",ic:"🛶",dur:230,cost:168,transit:{mode:"drive",mins:60,txt:"自驾60-75分钟"},detail:"江南第一水乡，联票¥80/人（周庄两日联票、60-69岁半价）。⚠ 这是赶路档：来回2小时+逛2.5小时，选它今天会紧。",pros:["水乡氛围独一份","周日比周六人少"],cons:["车程远、整天被占满","与「不赶」原则冲突"],res:"联票提前买可8折；60岁以上带证半价"},
+    {id:"xc",name:"西园寺 · 素面清修",ic:"🛕",dur:110,cost:20,transit:{mode:"drive",mins:15,txt:"打车15分钟"},detail:"门票¥5含3支香，观音面¥15管饱；撸猫、抄经、数罗汉，人均¥50内。17:00关门，距留园步行10分钟。",pros:["极清静、花费低","素面好吃"],cons:["景致单一","离主线绕"],res:""}
+  ]},
+  {id:"d2c",label:"午餐",options:[
+    {id:"gq2",name:"观前街扫街",ic:"🍢",dur:60,cost:90,transit:{mode:"walk",mins:5,txt:"虎丘回古城→观前"},detail:"哑巴生煎+鸡头米+糖粥+豆腐干，边走边吃，把午饭交给小吃。",pros:["丰富不重样","便宜"],cons:["没坐的地方"],res:""},
+    {id:"shl2",name:"松鹤楼 · 补一顿",ic:"🐟",dur:75,cost:260,transit:{mode:"walk",mins:8,txt:"步行8分钟"},detail:"周六没吃上老字号，周日补。",pros:["招牌到位"],cons:["贵、要排"],res:""},
+    {id:"mx",name:"朱鸿兴 · 面档收尾",ic:"🍜",dur:40,cost:70,transit:{mode:"walk",mins:6,txt:"步行6分钟"},detail:"用一碗焖肉面给旅程收尾。",pros:["快、便宜","有始有终"],cons:["简单"],res:""}
+  ]},
+  {id:"d2d",label:"下午 · 手信/收尾",options:[
+    {id:"sx",name:"观前街买手信",ic:"🎁",dur:85,cost:110,transit:{mode:"walk",mins:5,txt:"步行5分钟"},detail:"采芝斋糖果、黄天源糕团、津津豆腐干、碧螺春——一趟买齐，16:30 前收工出发。",pros:["品类齐、顺路","一趟搞定"],cons:["商业街、别买贵了"],res:"认准老字号门店，景区伴手礼溢价"},
+    {id:"cp2",name:"诚品书店最后一逛",ic:"📚",dur:110,cost:120,transit:{mode:"drive",mins:20,txt:"打车20分钟"},detail:"文创+书+咖啡，出发前再耗一小时（离沪方向顺路度一般）。",pros:["好逛不晒","适合书迷"],cons:["往返40分钟","易超时"],res:""},
+    {id:"pj2",name:"平江路补逛",ic:"🛶",dur:80,cost:60,transit:{mode:"walk",mins:10,txt:"步行10分钟"},detail:"周六没走够的河巷，周日补走+买茶颜。",pros:["近、轻松","茶颜悦色顺路"],cons:["重复感"],res:""},
+    {id:"zz3",name:"直接早走",ic:"🚗",dur:15,cost:0,transit:{mode:"walk",mins:5,txt:"回酒店取车"},detail:"不逛了，取车直接出发——周日出城越早越顺。",pros:["完美避堵","到家最早"],cons:["手信没买"],res:""}
+  ]},
+  {id:"d2e",label:"返程出发时间",options:[
+    {id:"r1",name:"16:30 出发（推荐·避堵）",ic:"🚗",tag:"推荐",dur:115,cost:120,transit:{mode:"drive",mins:0,txt:"加满油上G2"},detail:"周日出城 16:00-18:00 是最堵窗口，16:30 走≈18:30 到家，避开沪宁段峰值。",pros:["最稳的避堵窗口","到家还能吃晚饭"],cons:["下午手信要压缩"],res:""},
+    {id:"r2",name:"17:30 出发",ic:"🚙",dur:115,cost:120,transit:{mode:"drive",mins:0,txt:"上G2"},detail:"山塘/手信结束后卡点走，19:30 前后到家。",pros:["行程更满"],cons:["正撞晚高峰尾巴"],res:""},
+    {id:"r3",name:"晚饭后 20:00 走",ic:"🌙",dur:130,cost:130,transit:{mode:"drive",mins:0,txt:"上G2"},detail:"错峰到极致：20:00 路上空，22:00 前到家——适合周五没睡够的。",pros:["路上几乎不堵","到家不慌"],cons:["到家晚、明天要上班慎选"],res:""}
+  ]}
+ ]}
+];
+const SEL={};
+DAYS.forEach(d=>d.slots.forEach(s=>{ if(s.fixed){SEL[s.id]=s.fixed.id||"fx";} else {SEL[s.id]=s.options.find(o=>o.tag==="推荐")?.id||s.options[0].id;} }));
+const BASE=JSON.stringify(SEL);
+const MODE={walk:"🚶",drive:"🚕",bus:"🚌",metro:"🚇"};
+function fmt(m){m=((m%1440)+1440)%1440;const h=Math.floor(m/60),mm=m%60;return String(h).padStart(2,"0")+":"+String(mm).padStart(2,"0");}
+function getOpt(slot){ if(slot.fixed) return slot.fixed; return slot.options.find(o=>o.id===SEL[slot.id]); }
+function render(){
+ let grandCost=0,grandTr=0;
+ DAYS.forEach(day=>{
+  let cur=day.anchor,cost=0,tr=0;
+  const parts=day.slots.map(slot=>{
+   const o=getOpt(slot);
+   const tIn=o.transit?o.transit.mins:0;
+   const start=cur+tIn, end=start+o.dur;
+   tr+=tIn; cost+=o.cost||0; cur=end;
+   return {slot,o,tIn,start,end};
+  });
+  const dayEl=document.getElementById("day-"+day.id);
+  dayEl.innerHTML=parts.map(({slot,o,tIn,start,end},idx)=>{
+   const trans=parts[idx-1]? `<div class="transit"><span class="arrow">↓</span> ${MODE[o.transit.mode]||"→"} ${o.transit.txt||""} · ${tIn}分钟</div>`:"";
+   const isSel=SEL[slot.id]===(o.id);
+   let chips="";
+   if(!slot.fixed){
+    chips='<div class="chips">'+slot.options.map(x=>`<button class="chip ${x.id===SEL[slot.id]?"on":(x.tag?"":"alt")}" onclick="pick('${slot.id}','${x.id}')">${x.tag?x.tag+" · ":""}${x.name}</button>`).join("")+'</div>';
+   }
+   const pros=`<div class="pc"><div class="pro"><b>✔ 优点</b>${(o.pros||[]).join("；")}</div><div class="con"><b>✘ 缺点</b>${(o.cons||[]).join("；")}</div></div>`;
+   const badges=`<div class="row"><span class="badge">${fmt(start)} - ${fmt(end)}</span><span class="badge">约 ${Math.round(o.dur/60*10)/10} 小时</span><span class="badge money">¥${o.cost||0}</span>${o.tag?`<span class="badge money">${o.tag}</span>`:""}</div>`;
+   const res=o.res?`<div class="res">📌 ${o.res}</div>`:"";
+   let cmp="";
+   if(!slot.fixed){
+    cmp=`<details class="cmp"><summary>▤ 和其他选项对比（点击行切换）</summary><table><tr><th>选项</th><th>门票/花费</th><th>时长</th><th>路程</th><th>优点</th><th>缺点</th></tr>${slot.options.map(x=>`<tr class="${x.id===SEL[slot.id]?"on":""}"><td class="pick" onclick="pick('${slot.id}','${x.id}')">${x.tag?"★ ":""}${x.name}${x.id===SEL[slot.id]?" ✓":""}</td><td>¥${x.cost||0}</td><td>${Math.round(x.dur/60*10)/10}h</td><td>${x.transit.txt||"-"}</td><td>${(x.pros||[])[0]||""}<span class="mini">${(x.pros||[])[1]||""}</span></td><td>${(x.cons||[])[0]||""}<span class="mini">${(x.cons||[])[1]||""}</span></td></tr>`).join("")}</table></details>`;
+   }
+   return trans+`<div class="slot ${isSel?"sel-slot":""}"><div class="s-top"><div class="s-time">${fmt(start)}<br><span style="color:var(--soft);font-weight:400">${fmt(end)}</span></div><div class="s-body"><div class="s-label">${slot.label}</div><div class="s-name"><span class="ic">${o.ic||""}</span>${o.name}</div>${o.detail?`<div class="s-sub">${o.detail}</div>`:""}</div></div>${chips}<div class="detail">${badges}${pros}${res}${slot.fixed?"":"<b style='font-size:12.5px'>↳ 当前选择：</b>"+o.name}</div>${cmp}</div>`;
+  }).join("");
+  // footer
+  document.getElementById("foot-"+day.id).innerHTML=`⏱ 结束 <b>${fmt(cur)}</b> ｜🎫 当日花费 <b>¥${cost}</b> ｜🧭 交通合计 <b>${tr} 分钟</b> <button class="btn" onclick="resetDay('${day.id}')">↺ 恢复推荐线</button>`;
+  // summary bars
+  const sum=document.getElementById("sum-"+day.id);
+  if(sum) sum.innerHTML=`当前选择 → 🎫 <b>¥${cost}</b> ｜ 🧭 交通 <b>${tr}分钟</b> ｜ ⏱ 收尾 <b>${fmt(cur)}</b>`;
+  grandCost+=cost; grandTr+=tr;
+ });
+ // grand
+ const g=document.getElementById("grand"); if(g) g.innerHTML=`全程预估 <b>¥${grandCost}</b>（两人） · 交通 <b>${grandTr}分钟</b>`;
+}
+function pick(slotId,optId){
+ const old=SEL[slotId];
+ if(old===optId) return;
+ SEL[slotId]=optId;
+ render();
+ const day=DAYS.find(d=>d.slots.some(s=>s.id===slotId));
+ const slot=day.slots.find(s=>s.id===slotId);
+ const o=slot.options.find(x=>x.id===optId);
+ const prev=slot.options.find(x=>x.id===old);
+ toast(`已调整：${prev?prev.name:""} → ${o.name}，后续时间自动顺延`);
+}
+function resetDay(id){
+ const day=DAYS.find(d=>d.id===id);
+ day.slots.forEach(s=>{ if(!s.fixed) SEL[s.id]=s.options.find(o=>o.tag==="推荐")?.id||s.options[0].id; });
+ render(); toast("已恢复推荐线");
+}
+let toastT;
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),2600);}
+render();
+</script>
 </body>
 </html>
